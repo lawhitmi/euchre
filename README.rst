@@ -11,6 +11,44 @@ Description
 
 A longer description of your project goes here...
 
+UML
+===========
+
+Metrics
+===========
+
+Clean Code
+===========
+
+Build Management
+===========
+
+Testing
+===========
+
+Continuous Delivery
+===========
+
+IDE (favorite key shortcuts?)
+===========
+
+DSL
+===========
+
+Functional Programming
+===========
+
+OPTIONAL-Logical Solver
+===========
+
+OPTIONAL-Code fragment in Scala or Clojure
+===========
+
+OPTIONAL-AOP
+===========
+
+
+
 
 Note
 ====
