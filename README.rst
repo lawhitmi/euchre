@@ -31,6 +31,7 @@ Continuous Delivery
 
 IDE (favorite key shortcuts?)
 ===========
+Shift-Esc
 
 DSL
 ===========
