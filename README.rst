@@ -28,6 +28,7 @@ Testing
 
 Continuous Delivery
 ===========
+travis ci or github actions
 
 IDE (favorite key shortcuts?)
 ===========

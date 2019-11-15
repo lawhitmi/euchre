@@ -1,0 +1,18 @@
+<component name="ProjectDictionaryState">
+  <dictionary name="Lucas">
+    <words>
+      <w>basevalue</w>
+      <w>carddict</w>
+      <w>cardindex</w>
+      <w>dealerflag</w>
+      <w>facevalue</w>
+      <w>leadsuit</w>
+      <w>makerflag</w>
+      <w>nondealer</w>
+      <w>othercard</w>
+      <w>resetval</w>
+      <w>roundvalue</w>
+      <w>trumpsuit</w>
+    </words>
+  </dictionary>
+</component>
