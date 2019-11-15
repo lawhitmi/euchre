@@ -1,14 +1,27 @@
 from src.euchre.hands import UserHand, ComputerHand
 from src.euchre.deck import CardDeck
+from random import randint
+
+
+def pickDealer():
+    """
+
+    :return:
+    """
+    isuserdealer = bool(randint(0, 1))
+    iscomputerdealer = not isuserdealer
+    return tuple((isuserdealer, iscomputerdealer))
 
 
 class Euchre:
     """
 
     """
+
     def __init__(self):
-        self.user = UserHand(dealerflag=True)
-        self.computer = ComputerHand()
+        dealermask = pickDealer()
+        self.user = UserHand(dealerflag=dealermask[0])
+        self.computer = ComputerHand(dealerflag=dealermask[1])
         self.tricks = {}
         self.bidCard = {}
         self.trumpSuit = ""
@@ -40,13 +53,19 @@ class Euchre:
             self.lastWinner = self.trickPhase()
             break
 
-    def bidPhase(self, dealer, nondealer):
+    def bidPhase(self, player1, player2):
         """
         Controls the bidding phase and determines the trump suit
         :param dealer:
         :param nondealer:
         :return:
         """
+        if player1.dealer:
+            dealer = player1
+            nondealer = player2
+        elif player2.dealer:
+            dealer = player2
+            nondealer = player1
         self.showTable()
         nondealer.setValues(self.bidCard[1].suit)
         dealer.setValues(self.bidCard[1].suit)
@@ -67,14 +86,6 @@ class Euchre:
                     self.showTable()
                     dealerDec2 = dealer.bidDecide(rnd=2)
                     return tuple((dealerDec2, dealer))
-
-    def pickDealer(self):
-        """
-
-        :return:
-        """
-        # TODO Implement pickDealer
-        NotImplemented
 
     def trickPhase(self, maker, nonmaker):
         """

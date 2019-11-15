@@ -127,7 +127,6 @@ class ComputerHand(Hand):
 
     def bidDecide(self, rnd=1):
         handVal = self.calcHandVal()
-        print("Handval:"+str(handVal))
         if rnd == 1:
             if not self.dealer:
                 if handVal >= 35:
