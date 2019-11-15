@@ -29,6 +29,8 @@ Testing
 Continuous Delivery
 ===========
 travis ci or github actions
+.. image:: https://travis-ci.org/lawhitmi/euchre.svg?branch=master
+
 
 IDE (favorite key shortcuts?)
 ===========
