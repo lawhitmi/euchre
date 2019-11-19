@@ -30,7 +30,7 @@ class Hand:
         """
         cardString = ""
         for i in self.cards:
-            cardString = cardString + str(self.cards[i])
+            cardString = cardString + str(i) + str(self.cards[i])
         return cardString
 
 
@@ -71,7 +71,7 @@ class UserHand(Hand):
                         continue
                     else:
                         break
-
+                # TODO when dealer accepts, he must pick up the card and discard one.  Need to implement this
                 if decision == 1:
                     return 'accept'
                 elif decision == 2:
@@ -110,6 +110,19 @@ class UserHand(Hand):
                 respDict = {1: 'Hearts', 2: 'Diamonds', 3: 'Spades', 4: 'Clubs'}
                 return respDict[decision]
 
+    def trickDecide(self):
+        while True:
+            try:
+                cardToPlay = int(input("Which card would you like to play? "))
+                if cardToPlay not in self.cards.items:
+                    raise ValueError
+            except ValueError:
+                print('Sorry, please provide a valid input...')
+                continue
+            else:
+                break
+        return self.playCard(cardToPlay)
+
 
 class ComputerHand(Hand):
     """Controls the Computer's Hand
@@ -138,6 +151,7 @@ class ComputerHand(Hand):
             elif self.dealer:
                 if handVal >= 48:
                     print('Computer accepts')
+                    # TODO when dealer accepts, he must pick up the card and discard one.  Need to implement this
                     return 'accept'
                 else:
                     print('Computer passes')

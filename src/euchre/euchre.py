@@ -87,15 +87,25 @@ class Euchre:
                     dealerDec2 = dealer.bidDecide(rnd=2)
                     return tuple((dealerDec2, dealer))
 
-    def trickPhase(self, maker, nonmaker):
+    def trickPhase(self, player1, player2):
         """
 
         :param maker:
         :param nonmaker:
         :return:
         """
-        # TODO Implement trickPhase
-        NotImplemented
+        if player1.maker:
+            maker = player1
+            defender = player2
+        elif player2.maker:
+            maker = player2
+            defender = player1
+
+        if player1.dealer:
+            player2.trickDecide()
+
+        elif player2.dealer:
+            player1.trickDecide()
 
 
 if __name__ == '__main__':
