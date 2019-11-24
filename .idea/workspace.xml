@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b904eb0d-1452-4ccc-8ca4-941c129b6a27" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.coverage" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_euchre.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_euchre.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -134,7 +130,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574600954420</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Edits made to see if gradle can be used in Travis CI">
+      <created>1574602511438</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1574602511438</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -186,6 +189,7 @@
     <MESSAGE value="Global changes to get testing setup and integrate travisci" />
     <MESSAGE value="Global changes for testing and TravisCI - 2nd attempt" />
     <MESSAGE value="Added pytest-cov to requirements" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added pytest-cov to requirements" />
+    <MESSAGE value="Edits made to see if gradle can be used in Travis CI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edits made to see if gradle can be used in Travis CI" />
   </component>
 </project>
