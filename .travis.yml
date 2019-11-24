@@ -9,4 +9,4 @@ install:
 #command to run tests
 script:
   #- ./gradlew build --scan -s
-  - python ./src/euchre/euchre.py
+  - pytest -v

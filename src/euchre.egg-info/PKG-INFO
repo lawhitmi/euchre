@@ -1,0 +1,75 @@
+Metadata-Version: 2.1
+Name: euchre
+Version: 0.0.post0.dev10+gfb9af06.dirty
+Summary: Add a short description here!
+Home-page: https://github.com/pyscaffold/pyscaffold/
+Author: Lucas Whitmire
+Author-email: lucas.whitmire@gmail.com
+License: mit
+Project-URL: Documentation, https://pyscaffold.org/
+Description: ======
+        euchre
+        ======
+        
+        
+        Add a short description here!
+        
+        
+        Description
+        ===========
+        
+        A longer description of your project goes here...
+        
+        UML
+        ===========
+        
+        Metrics
+        ===========
+        
+        Clean Code
+        ===========
+        
+        Build Management
+        ===========
+        
+        Testing
+        ===========
+        
+        Continuous Delivery
+        ===========
+        .. image:: https://travis-ci.org/lawhitmi/euchre.svg?branch=master
+        
+        
+        IDE (favorite key shortcuts?)
+        ===========
+        Shift-Esc
+        
+        DSL
+        ===========
+        
+        Functional Programming
+        ===========
+        
+        OPTIONAL-Logical Solver
+        ===========
+        
+        OPTIONAL-Code fragment in Scala or Clojure
+        ===========
+        
+        OPTIONAL-AOP
+        ===========
+        
+        
+        
+        
+        Note
+        ====
+        
+        This project has been set up using PyScaffold 3.2.3. For details and usage
+        information on PyScaffold see https://pyscaffold.org/.
+        
+Platform: any
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python
+Description-Content-Type: text/x-rst; charset=UTF-8
+Provides-Extra: testing

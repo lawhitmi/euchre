@@ -2,9 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b904eb0d-1452-4ccc-8ca4-941c129b6a27" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.coverage" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/runTests.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/euchre.egg-info/PKG-INFO" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/euchre.egg-info/SOURCES.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/euchre.egg-info/dependency_links.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/euchre.egg-info/not-zip-safe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/euchre.egg-info/requires.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/euchre.egg-info/top_level.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/.coverage" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_card.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_euchre.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/euchre/card.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/euchre/card.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/euchre/euchre.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/euchre/euchre.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/euchre/hands.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/euchre/hands.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_skeleton.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,7 +45,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyIntegratedToolsModulesConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">

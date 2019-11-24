@@ -1,5 +1,5 @@
-from src.euchre.hands import UserHand, ComputerHand
-from src.euchre.deck import CardDeck
+from . hands import UserHand, ComputerHand
+from . deck import CardDeck
 from random import randint
 
 
