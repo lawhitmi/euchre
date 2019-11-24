@@ -7,6 +7,6 @@
 
  tasks.register("tests") {
     doLast {
-        Runtime.getRuntime().exec("git-bash ./runTests.sh")
+        Runtime.getRuntime().exec("./runTests.sh")
     }
  }
