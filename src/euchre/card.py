@@ -18,7 +18,7 @@ class Card:
         :param resetval:
         :return:
         """
-        # STILL NEED TO ADD BOWERS HERE
+        # TODO STILL NEED TO ADD BOWERS HERE
         if resetval:
             self.roundvalue = self.basevalue
         elif self.suit == trumpsuit:
