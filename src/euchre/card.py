@@ -1,10 +1,10 @@
-
 class Card:
     def __init__(self, facevalue, suit, roundvalue):
         self.facevalue = facevalue
         self.suit = suit
         self.roundvalue = roundvalue
         self.basevalue = roundvalue
+        self.colorCode = {'Spades': 'black', 'Clubs': 'black', 'Diamonds': 'red', 'Hearts': 'red'}
         self.color = self.setColor()
 
     def getValue(self):
@@ -18,19 +18,25 @@ class Card:
         :param resetval:
         :return:
         """
-        # TODO STILL NEED TO ADD BOWERS HERE
         if resetval:
             self.roundvalue = self.basevalue
-        elif self.suit == trumpsuit:
-            self.roundvalue += 7
-        elif trumpsuit != leadsuit:
-            self.roundvalue += 1
+
+        if trumpsuit:
+            if self.suit == trumpsuit:
+                self.roundvalue += 14
+                # Right Bower
+                if self.facevalue == 'J':
+                    self.roundvalue += 5
+            # Left Bower
+            elif self.facevalue == 'J' and self.color == self.colorCode[trumpsuit]:
+                self.roundvalue += 18
+
+        if leadsuit:
+            if trumpsuit != leadsuit:
+                self.roundvalue += 7
 
     def setColor(self):
-        if self.suit == 'Diamonds' or self.suit == 'Hearts':
-            return 'red'
-        else:
-            return 'black'
+        return self.colorCode[self.suit]
 
     def __repr__(self):
         return str((self.facevalue, self.suit))
