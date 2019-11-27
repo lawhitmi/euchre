@@ -165,7 +165,21 @@
       <option name="project" value="LOCAL" />
       <updated>1574858871455</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Added sonarcloud badges">
+      <created>1574859524663</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1574859524663</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Added sonarcloud badges - Attempt 2">
+      <created>1574859629242</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1574859629242</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -222,6 +236,8 @@
     <MESSAGE value="update permissions for runTests.sh for use with travisCI" />
     <MESSAGE value="Added testing for deck and euchre classes. Also added bowers to&#10;valuation in Card class" />
     <MESSAGE value="Added sonarcloud.properties for sonarcloud setup" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added sonarcloud.properties for sonarcloud setup" />
+    <MESSAGE value="Added sonarcloud badges" />
+    <MESSAGE value="Added sonarcloud badges - Attempt 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added sonarcloud badges - Attempt 2" />
   </component>
 </project>
