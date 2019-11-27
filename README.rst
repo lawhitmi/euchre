@@ -16,11 +16,11 @@ UML
 
 Metrics
 ===========
-[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=lawhitmi_euchre&metric=sqale_index)](https://sonarcloud.io/dashboard?id=lawhitmi_euchre)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=lawhitmi_euchre&metric=bugs)](https://sonarcloud.io/dashboard?id=lawhitmi_euchre)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=lawhitmi_euchre&metric=alert_status)](https://sonarcloud.io/dashboard?id=lawhitmi_euchre)
+#[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=lawhitmi_euchre&metric=sqale_index)](https://sonarcloud.io/dashboard?id=lawhitmi_euchre)
+#[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=lawhitmi_euchre&metric=bugs)](https://sonarcloud.io/dashboard?id=lawhitmi_euchre)
+#[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=lawhitmi_euchre&metric=alert_status)](https://sonarcloud.io/dashboard?id=lawhitmi_euchre)
 .. image:: https://sonarcloud.io/api/project_badges/measure?project=lawhitmi_euchre&metric=alert_status
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=lawhitmi_euchre&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=lawhitmi_euchre)
+#[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=lawhitmi_euchre&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=lawhitmi_euchre)
 
 Clean Code
 ===========
