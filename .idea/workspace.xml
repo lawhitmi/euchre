@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b904eb0d-1452-4ccc-8ca4-941c129b6a27" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.rst" beforeDir="false" afterPath="$PROJECT_DIR$/README.rst" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -159,7 +158,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574609691967</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Added sonarcloud.properties for sonarcloud setup">
+      <created>1574858871455</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1574858871455</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -215,6 +221,7 @@
     <MESSAGE value="update permissions for gradlew for use with travisCI" />
     <MESSAGE value="update permissions for runTests.sh for use with travisCI" />
     <MESSAGE value="Added testing for deck and euchre classes. Also added bowers to&#10;valuation in Card class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added testing for deck and euchre classes. Also added bowers to&#10;valuation in Card class" />
+    <MESSAGE value="Added sonarcloud.properties for sonarcloud setup" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added sonarcloud.properties for sonarcloud setup" />
   </component>
 </project>
