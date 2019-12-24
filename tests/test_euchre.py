@@ -6,6 +6,7 @@ def test_pickDealer():
     # Ensure only one dealer is chosen
     assert x != y
 
+
 def test_Euchre():
     #game = Euchre()
     NotImplemented

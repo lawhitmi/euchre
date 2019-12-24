@@ -1,5 +1,5 @@
 from random import sample
-from ..euchre.card import Card
+from card import Card
 
 
 class CardDeck:
@@ -20,13 +20,16 @@ class CardDeck:
                 i += 1
         return deckDict
 
+    def shuffle(self):
+        self.CardDict = self.buildDeck()
+
     def deal(self, player='y'):
         """Selects 5 randomized cards from CardDict and returns them as a Dict
         This action removes the cards from CardDict"""
         if player == 'y':
             mask = sample(self.CardDict.keys(), 5)
         elif player == 'n':
-            mask = sample(self.CardDict.keys(), 1)
+            return self.CardDict.pop(sample(self.CardDict.keys(), 1)[0])
         hand = {}
         count = 1
         for i in mask:

@@ -25,7 +25,7 @@ Clean Code
 
 Build Management
 ===========
-
+Gradle
 Testing
 ===========
 
@@ -36,7 +36,7 @@ Continuous Delivery
 
 IDE (favorite key shortcuts?)
 ===========
-Shift-Esc
+
 
 DSL
 ===========

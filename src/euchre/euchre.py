@@ -1,6 +1,8 @@
-from . hands import UserHand, ComputerHand
-from . deck import CardDeck
 from random import randint
+from table import Table
+from deck import CardDeck
+from hands import ComputerHand, UserHand
+import time
 
 
 def pickDealer():
@@ -13,100 +15,126 @@ def pickDealer():
     return tuple((isuserdealer, iscomputerdealer))
 
 
-class Euchre:
+def game():
     """
 
+    :return:
     """
+    deck = CardDeck()
+    dealermask = pickDealer()
+    user = UserHand(dealerflag=dealermask[0], cards=deck.deal(player='y'))
+    computer = ComputerHand(dealerflag=dealermask[1], cards=deck.deal(player='y'))
+    bidcard = deck.deal(player='n')
+    table = Table(user, computer, bidcard)
 
-    def __init__(self):
-        dealermask = pickDealer()
-        self.user = UserHand(dealerflag=dealermask[0])
-        self.computer = ComputerHand(dealerflag=dealermask[1])
-        self.tricks = {}
-        self.bidCard = {}
-        self.trumpSuit = ""
-        self.maker = ""
-        self.lastWinner = ""
-        self.play()
+    while True:
 
-    def showTable(self):
-        """
-        Prints the playing table, Computer Hand, Field, User Hand
-        :return:
-        """
-        print(str(self.computer))
-        print(str(self.bidCard[1]))
-        print(str(self.user))
+        if user.dealer:
+            dealer = user
+            nondealer = computer
+        else:
+            dealer = computer
+            nondealer = user
 
-    def play(self):
-        """
-
-        :return:
-        """
-        while 10 not in self.tricks.values():
-            deck = CardDeck()
-            self.bidCard = deck.deal(player='n')
-            self.user.setCards(deck.deal(player='y'))
-            self.computer.setCards(deck.deal(player='y'))
-            self.trumpSuit, self.maker = self.bidPhase(self.user, self.computer)
-            self.maker.setMaker()
-            self.lastWinner = self.trickPhase()
+        trumpsuit, maker = bidPhase(nondealer, dealer, bidcard, table)
+        table.setTrumpSuit(trumpsuit)
+        maker.setMaker()
+        tricks = {user: 0, computer: 0}
+        trickwinner, points = trickPhase(nondealer, dealer, trumpsuit, table)
+        table.tricks[trickwinner] += points
+        # tricks[trickwinner] += points
+        print(tricks[trickwinner])
+        if tricks[trickwinner] >= 10:
+            # TODO create declare winner screen
+            print(trickwinner.name + 'wins!')
             break
 
-    def bidPhase(self, player1, player2):
-        """
-        Controls the bidding phase and determines the trump suit
-        :param dealer:
-        :param nondealer:
-        :return:
-        """
-        if player1.dealer:
-            dealer = player1
-            nondealer = player2
-        elif player2.dealer:
-            dealer = player2
-            nondealer = player1
-        self.showTable()
-        nondealer.setValues(self.bidCard[1].suit)
-        dealer.setValues(self.bidCard[1].suit)
-        nonDealDec = nondealer.bidDecide()
-        if nonDealDec == 'order-up':
-            return tuple((self.bidCard[1].suit, nonDealDec))
-        elif nonDealDec == 'pass':
-            self.showTable()
-            dealerDec = dealer.bidDecide()
-            if dealerDec == 'accept':
-                return tuple((self.bidCard[1].suit, dealer))
-            elif dealerDec == 'pass':
-                self.showTable()
-                nonDealDec2 = nondealer.bidDecide(rnd=2)
-                if nonDealDec2 != 'pass':
-                    return tuple((nonDealDec2, nondealer))
-                else:
-                    self.showTable()
-                    dealerDec2 = dealer.bidDecide(rnd=2)
-                    return tuple((dealerDec2, dealer))
+        # Reset everything for next round
+        deck.shuffle()
+        user.clearHand()
+        computer.clearHand()
+        dealermask = pickDealer()
+        if dealermask[0]:
+            user.setDealer()
+        else:
+            computer.setDealer()
+        table.clearTable()
+        table.setBidcard(deck.deal(player='n'))
+        user.setCards(deck.deal(player='y'))
+        computer.setCards(deck.deal(player='y'))
 
-    def trickPhase(self, player1, player2):
-        """
 
-        :param maker:
-        :param nonmaker:
-        :return:
-        """
-        if player1.maker:
-            maker = player1
-            defender = player2
-        elif player2.maker:
-            maker = player2
-            defender = player1
+def bidPhase(nondealer, dealer, bidcard, table):
+    """
 
-        if player1.dealer:
-            player2.trickDecide()
+    :param nondealer:
+    :param dealer:
+    :param bidcard:
+    :param table:
+    :return:
+    """
+    table.showTable()
+    nonDealDec = nondealer.bidDecide()
+    if nonDealDec == 'order-up':
+        # TODO allow dealer the option to pick up the bidcard in this case
+        table.flipBidcard()
+        return tuple((bidcard.suit, nondealer))
+    elif nonDealDec == 'pass':
+        table.showTable()
+        dealerDec = dealer.bidDecide()
+        if dealerDec == 'accept':
+            # TODO accepted card should enter hand, and allow user to choose a card to discard (also need to call flipBidcard here
+            table.flipBidcard()
+            return tuple((bidcard.suit, dealer))
+        elif dealerDec == 'pass':
+            table.flipBidcard()
+            table.showTable()
+            nonDealDec = nondealer.bidDecide(rnd=2)
+            if nonDealDec != 'pass':
+                return tuple((nonDealDec, nondealer))
+            else:
+                table.showTable()
+                dealerDec = dealer.bidDecide(rnd=2)
+                return tuple((dealerDec, dealer))
 
-        elif player2.dealer:
-            player1.trickDecide()
+
+def trickPhase(firstplayer, secondplayer, trump, table, score={}):
+    if len(score) == 0:
+        score = {firstplayer: 0, secondplayer: 0}
+    winner = checkForWinner(score)
+    if winner:
+        return tuple((winner[0], winner[1]))
+    # TODO BUG HERE - It's asking to play a card when all cards are played
+    table.showTable(score=score)
+    card1 = firstplayer.trickDecide()
+    table.showTable(card1,score=score)
+    card2 = secondplayer.trickDecide(card1)
+    table.showTable(card1, card2, score=score)
+    time.sleep(1)
+    if card2 > card1:
+        score[secondplayer] += 1
+        trickwinner, points = trickPhase(secondplayer, firstplayer, trump, table, score)
+        return tuple((trickwinner, points))
+    else:
+        score[firstplayer] += 1
+        trickwinner, points = trickPhase(firstplayer, secondplayer, trump, table, score)
+        return tuple((trickwinner, points))
+
+
+def checkForWinner(score):
+    for i, j in score.items():
+        if not i.maker:
+            if j == 3:
+                return tuple((i, 2))  # Euchred opponent
+        else:
+            if j == 5:
+                return tuple((i, 2))  # Maker took all 5
+
+    if sum(score.values()) == 5:
+        for i, j in score.items():
+            if j == 3:
+                return tuple((i, 1))
 
 
 if __name__ == '__main__':
-    C = Euchre()
+    game()

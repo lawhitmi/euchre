@@ -2,16 +2,21 @@
   <dictionary name="Lucas">
     <words>
       <w>basevalue</w>
+      <w>bidcard</w>
       <w>carddict</w>
       <w>cardindex</w>
       <w>dealerflag</w>
       <w>facevalue</w>
+      <w>firstplayer</w>
       <w>leadsuit</w>
       <w>makerflag</w>
       <w>nondealer</w>
       <w>othercard</w>
+      <w>playedcard</w>
       <w>resetval</w>
       <w>roundvalue</w>
+      <w>secondplayer</w>
+      <w>trickwinner</w>
       <w>trumpsuit</w>
     </words>
   </dictionary>

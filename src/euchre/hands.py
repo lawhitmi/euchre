@@ -17,6 +17,14 @@ class Hand:
     def setMaker(self):
         self.maker = True
 
+    def setDealer(self):
+        self.dealer = True
+
+    def clearHand(self):
+        self.cards = ""
+        self.dealer = False
+        self.maker = False
+
     def playCard(self, cardindex):
         """Plays card from the `cards` removes from deck, and returns the Card instance
         
@@ -40,6 +48,7 @@ class UserHand(Hand):
 
     def __init__(self, cards={}, dealerflag=False, makerflag=False):
         super().__init__(cards, dealerflag, makerflag)
+        self.name="Player"  # needed to make object hashable for key in dict
 
     def bidDecide(self, rnd=1):
         if rnd == 1:
@@ -110,11 +119,14 @@ class UserHand(Hand):
                 respDict = {1: 'Hearts', 2: 'Diamonds', 3: 'Spades', 4: 'Clubs'}
                 return respDict[decision]
 
-    def trickDecide(self):
+    def trickDecide(self, playedcard=None):
+        # TODO add a check here to make sure that the user plays the matching suit if possible
+        if playedcard:
+            NotImplemented
         while True:
             try:
                 cardToPlay = int(input("Which card would you like to play? "))
-                if cardToPlay not in self.cards.items:
+                if cardToPlay not in self.cards.keys():
                     raise ValueError
             except ValueError:
                 print('Sorry, please provide a valid input...')
@@ -131,6 +143,7 @@ class ComputerHand(Hand):
     def __init__(self, cards={}, dealerflag=False, makerFlag=False, mode='norm'):
         super().__init__(cards, dealerflag, makerFlag)
         self.playMode = mode
+        self.name = "Computer"  # needed to make object hashable for key in dict
 
     def calcHandVal(self):
         handVal = 0
@@ -159,6 +172,39 @@ class ComputerHand(Hand):
         elif rnd == 2:
             if not self.dealer:
                 # TODO method to evaluate hand for each remaining suit
+                print('Computer chooses: Spades')
                 return 'Spades'
 
-    # TODO Implement a __repr__ method for computer to hide cards
+    def trickDecide(self, playedcard=None):
+        """
+
+        :param playedcard:
+        :return:
+        """
+        cardtoplay=0
+        if playedcard:
+            for i, j in self.cards.items():
+                if j.suit == playedcard.suit and j.roundvalue > playedcard.roundvalue:
+                    if cardtoplay != 0:
+                        if cardtoplay.roundvalue > j.roundvalue:
+                            cardtoplay = j
+                            indextoplay = i
+                    else:
+                        cardtoplay = j
+                        indextoplay = i
+            if cardtoplay != 0:
+                return self.playCard(indextoplay)
+            else:
+                return self.playCard(list(self.cards.keys())[0]) #TODO this is just a filler and definitely needs to be changed
+        else:
+            return self.playCard(list(self.cards.keys())[0])  # TODO this is just a filler and definitely needs to be changed
+
+    def __repr__(self):
+        if self.playMode == 'norm':
+            cardString = ""
+            for i in self.cards:
+                cardString = cardString + str(i) + str("('*','*')")
+            return cardString
+        elif self.playMode == 'learn':
+            return super.__repr__(self)
+

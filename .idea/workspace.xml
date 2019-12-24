@@ -2,7 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b904eb0d-1452-4ccc-8ca4-941c129b6a27" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/euchre/.coverage" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/euchre/table.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Lucas.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Lucas.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.rst" beforeDir="false" afterPath="$PROJECT_DIR$/README.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/euchre/card.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/euchre/card.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/euchre/deck.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/euchre/deck.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/euchre/euchre.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/euchre/euchre.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/euchre/hands.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/euchre/hands.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_card.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_card.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_euchre.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_euchre.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -41,7 +51,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.card">
+  <component name="RunManager" selected="Python.euchre">
     <configuration name="card" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Euchre" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -86,8 +96,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.card" />
         <item itemvalue="Python.euchre" />
+        <item itemvalue="Python.card" />
       </list>
     </recent_temporary>
   </component>
@@ -179,7 +189,28 @@
       <option name="project" value="LOCAL" />
       <updated>1574859629242</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Added sonarcloud badges - Attempt 3">
+      <created>1574859692798</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1574859692798</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Added sonarcloud badges - Attempt 4">
+      <created>1574859831330</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1574859831330</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Adding additional sonarcloud badges">
+      <created>1574859966340</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1574859966340</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -238,6 +269,9 @@
     <MESSAGE value="Added sonarcloud.properties for sonarcloud setup" />
     <MESSAGE value="Added sonarcloud badges" />
     <MESSAGE value="Added sonarcloud badges - Attempt 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added sonarcloud badges - Attempt 2" />
+    <MESSAGE value="Added sonarcloud badges - Attempt 3" />
+    <MESSAGE value="Added sonarcloud badges - Attempt 4" />
+    <MESSAGE value="Adding additional sonarcloud badges" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding additional sonarcloud badges" />
   </component>
 </project>
