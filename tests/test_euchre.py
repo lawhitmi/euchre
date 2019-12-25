@@ -1,4 +1,4 @@
-from src.euchre.euchre import pickDealer, Euchre
+from src.euchre.euchre import pickDealer, game
 
 
 def test_pickDealer():
@@ -8,7 +8,7 @@ def test_pickDealer():
 
 
 def test_Euchre():
-    #game = Euchre()
+    #game()
     NotImplemented
 
 

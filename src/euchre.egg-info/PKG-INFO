@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: euchre
-Version: 0.0.post0.dev10+gfb9af06.dirty
+Version: 0.0.post0.dev24+gc901039.dirty
 Summary: Add a short description here!
 Home-page: https://github.com/pyscaffold/pyscaffold/
 Author: Lucas Whitmire
@@ -25,13 +25,16 @@ Description: ======
         
         Metrics
         ===========
+        .. image:: https://sonarcloud.io/api/project_badges/measure?project=lawhitmi_euchre&metric=alert_status
+        .. image:: https://sonarcloud.io/api/project_badges/measure?project=lawhitmi_euchre&metric=sqale_index
+        .. image:: https://sonarcloud.io/api/project_badges/measure?project=lawhitmi_euchre&metric=code_smells
         
         Clean Code
         ===========
         
         Build Management
         ===========
-        
+        Gradle
         Testing
         ===========
         
@@ -42,7 +45,8 @@ Description: ======
         
         IDE (favorite key shortcuts?)
         ===========
-        Shift-Esc
+        Shift-F10 - run
+        Shift-F9 - debug
         
         DSL
         ===========

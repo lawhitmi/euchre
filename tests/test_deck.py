@@ -1,4 +1,5 @@
 from src.euchre.deck import CardDeck
+from src.euchre.card import Card
 
 
 def test_deal():
@@ -7,7 +8,7 @@ def test_deal():
     # Check length of hand dealt to player
     assert len(testDeck.deal(player='y')) == 5
     # Check length of 'hand' dealt as the bidding card
-    assert len(testDeck.deal(player='n')) == 1
+    assert isinstance(testDeck.deal(player='n'), Card)
     # Check that num of cards dealt above reflects the number of cards remaining in the deck
     assert len(testDeck.CardDict) == (deckSize-5-1)
 

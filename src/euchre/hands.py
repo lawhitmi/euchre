@@ -6,10 +6,11 @@ class Hand:
         self.dealer = dealerflag
         self.maker = makerflag
 
-    def setValues(self, trumpsuit):
+    def setValues(self, trumpsuit=None, leadsuit=None, resetval=False, evaltrumpsuit=False, basevaluereset=False):
         """Recalculates the value of each card based on lead card and trump suit"""
         for i in self.cards:
-            self.cards[i].setValue(trumpsuit=trumpsuit)
+            self.cards[i].setValue(trumpsuit=trumpsuit, leadsuit=leadsuit, resetval=resetval,
+                                   evaltrumpsuit=evaltrumpsuit, basevaluereset=basevaluereset)
 
     def setCards(self, carddict):
         self.cards = carddict
@@ -50,7 +51,7 @@ class UserHand(Hand):
         super().__init__(cards, dealerflag, makerflag)
         self.name="Player"  # needed to make object hashable for key in dict
 
-    def bidDecide(self, rnd=1):
+    def bidDecide(self, bidcard=None, rnd=1):
         if rnd == 1:
             if not self.dealer:
                 while True:
@@ -82,6 +83,8 @@ class UserHand(Hand):
                         break
                 # TODO when dealer accepts, he must pick up the card and discard one.  Need to implement this
                 if decision == 1:
+                    cardtodiscard = int(input('Which card would you like to discard?'))
+                    self.cards[cardtodiscard] = bidcard
                     return 'accept'
                 elif decision == 2:
                     return 'pass'
@@ -119,10 +122,10 @@ class UserHand(Hand):
                 respDict = {1: 'Hearts', 2: 'Diamonds', 3: 'Spades', 4: 'Clubs'}
                 return respDict[decision]
 
-    def trickDecide(self, playedcard=None):
+    def trickDecide(self, trumpsuit, playedcard=None):
         # TODO add a check here to make sure that the user plays the matching suit if possible
         if playedcard:
-            NotImplemented
+            self.setValues(trumpsuit=trumpsuit, leadsuit=playedcard.getSuit())
         while True:
             try:
                 cardToPlay = int(input("Which card would you like to play? "))
@@ -140,19 +143,27 @@ class ComputerHand(Hand):
     """Controls the Computer's Hand
     """
 
-    def __init__(self, cards={}, dealerflag=False, makerFlag=False, mode='norm'):
+    def __init__(self, cards={}, dealerflag=False, makerFlag=False, mode='learn'):
         super().__init__(cards, dealerflag, makerFlag)
         self.playMode = mode
         self.name = "Computer"  # needed to make object hashable for key in dict
 
-    def calcHandVal(self):
+    def calcHandVal(self, trumpsuit):
+        if trumpsuit:
+            self.setValues(trumpsuit=trumpsuit, evaltrumpsuit=True)
+        else:
+            self.setValues(basevaluereset=True)
         handVal = 0
         for i in self.cards:
             handVal += self.cards[i].roundvalue
         return handVal
 
-    def bidDecide(self, rnd=1):
-        handVal = self.calcHandVal()
+    def bidDecide(self, bidcard=None, rnd=1):
+        if bidcard:
+            handVal = self.calcHandVal(bidcard.getSuit())
+        else:
+            handVal = self.calcHandVal()
+
         if rnd == 1:
             if not self.dealer:
                 if handVal >= 35:
@@ -164,7 +175,9 @@ class ComputerHand(Hand):
             elif self.dealer:
                 if handVal >= 48:
                     print('Computer accepts')
-                    # TODO when dealer accepts, he must pick up the card and discard one.  Need to implement this
+                    self.setValues(trumpsuit=bidcard.suit, evaltrumpsuit=True)
+                    swapIndex=self.findLowestCard()
+                    self.cards[swapIndex] = bidcard
                     return 'accept'
                 else:
                     print('Computer passes')
@@ -175,14 +188,16 @@ class ComputerHand(Hand):
                 print('Computer chooses: Spades')
                 return 'Spades'
 
-    def trickDecide(self, playedcard=None):
+    def trickDecide(self, trumpsuit, playedcard=None):
         """
 
+        :param trumpsuit:
         :param playedcard:
         :return:
         """
-        cardtoplay=0
+        cardtoplay = 0
         if playedcard:
+            self.setValues(trumpsuit=trumpsuit, leadsuit=playedcard.getSuit())
             for i, j in self.cards.items():
                 if j.suit == playedcard.suit and j.roundvalue > playedcard.roundvalue:
                     if cardtoplay != 0:
@@ -199,6 +214,15 @@ class ComputerHand(Hand):
         else:
             return self.playCard(list(self.cards.keys())[0])  # TODO this is just a filler and definitely needs to be changed
 
+    def findLowestCard(self):
+        minval = 100
+        lowcardindex = None
+        for idx, card in self.cards.items():
+            if card.getValue() <= minval:
+                minval = card.getValue()
+                lowcardindex = idx
+        return lowcardindex
+
     def __repr__(self):
         if self.playMode == 'norm':
             cardString = ""
@@ -206,5 +230,5 @@ class ComputerHand(Hand):
                 cardString = cardString + str(i) + str("('*','*')")
             return cardString
         elif self.playMode == 'learn':
-            return super.__repr__(self)
+            return super(ComputerHand, self).__repr__()
 

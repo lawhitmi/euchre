@@ -1,7 +1,7 @@
 from random import randint
-from table import Table
-from deck import CardDeck
-from hands import ComputerHand, UserHand
+from .table import Table
+from .deck import CardDeck
+from .hands import ComputerHand, UserHand
 import time
 
 
@@ -37,7 +37,12 @@ def game():
             nondealer = user
 
         trumpsuit, maker = bidPhase(nondealer, dealer, bidcard, table)
+        # TODO BUG occasionally returns the wrong trump suit?  seen when 'accepting'
         table.setTrumpSuit(trumpsuit)
+        user.setValues(basevaluereset=True)
+        computer.setValues(basevaluereset=True)
+        user.setValues(trumpsuit=trumpsuit, evaltrumpsuit=True)
+        computer.setValues(trumpsuit=trumpsuit, evaltrumpsuit=True)
         maker.setMaker()
         tricks = {user: 0, computer: 0}
         trickwinner, points = trickPhase(nondealer, dealer, trumpsuit, table)
@@ -46,7 +51,7 @@ def game():
         print(tricks[trickwinner])
         if tricks[trickwinner] >= 10:
             # TODO create declare winner screen
-            print(trickwinner.name + 'wins!')
+            print(str(trickwinner.name) + 'wins!')
             break
 
         # Reset everything for next round
@@ -74,16 +79,15 @@ def bidPhase(nondealer, dealer, bidcard, table):
     :return:
     """
     table.showTable()
-    nonDealDec = nondealer.bidDecide()
+    nonDealDec = nondealer.bidDecide(bidcard=bidcard)
     if nonDealDec == 'order-up':
         # TODO allow dealer the option to pick up the bidcard in this case
         table.flipBidcard()
         return tuple((bidcard.suit, nondealer))
     elif nonDealDec == 'pass':
         table.showTable()
-        dealerDec = dealer.bidDecide()
+        dealerDec = dealer.bidDecide(bidcard=bidcard)
         if dealerDec == 'accept':
-            # TODO accepted card should enter hand, and allow user to choose a card to discard (also need to call flipBidcard here
             table.flipBidcard()
             return tuple((bidcard.suit, dealer))
         elif dealerDec == 'pass':
@@ -104,19 +108,25 @@ def trickPhase(firstplayer, secondplayer, trump, table, score={}):
     winner = checkForWinner(score)
     if winner:
         return tuple((winner[0], winner[1]))
-    # TODO BUG HERE - It's asking to play a card when all cards are played
     table.showTable(score=score)
-    card1 = firstplayer.trickDecide()
-    table.showTable(card1,score=score)
-    card2 = secondplayer.trickDecide(card1)
-    table.showTable(card1, card2, score=score)
-    time.sleep(1)
+    card1 = firstplayer.trickDecide(trumpsuit=trump)
+    firstplayer.setValues(trumpsuit=trump, leadsuit=card1.getSuit())
+    table.showTable(card1, score=score)
+    card2 = secondplayer.trickDecide(trumpsuit=trump, playedcard=card1)
+    firstplayer.setValues(trumpsuit=trump, resetval=True)
+    secondplayer.setValues(trumpsuit=trump, resetval=True)
     if card2 > card1:
         score[secondplayer] += 1
+        table.showTable(card1, card2, score=score)
+        time.sleep(1)
+
         trickwinner, points = trickPhase(secondplayer, firstplayer, trump, table, score)
         return tuple((trickwinner, points))
     else:
         score[firstplayer] += 1
+        table.showTable(card1, card2, score=score)
+        time.sleep(1)
+
         trickwinner, points = trickPhase(firstplayer, secondplayer, trump, table, score)
         return tuple((trickwinner, points))
 
@@ -132,9 +142,9 @@ def checkForWinner(score):
 
     if sum(score.values()) == 5:
         for i, j in score.items():
-            if j == 3:
+            if j >= 3:
                 return tuple((i, 1))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     game()

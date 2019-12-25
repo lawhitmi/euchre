@@ -5,11 +5,18 @@
       <w>bidcard</w>
       <w>carddict</w>
       <w>cardindex</w>
+      <w>cardtoplay</w>
+      <w>colorcode</w>
       <w>dealerflag</w>
+      <w>dealermask</w>
+      <w>evaltrumpsuit</w>
       <w>facevalue</w>
       <w>firstplayer</w>
+      <w>indextoplay</w>
       <w>leadsuit</w>
+      <w>lowcardindex</w>
       <w>makerflag</w>
+      <w>minval</w>
       <w>nondealer</w>
       <w>othercard</w>
       <w>playedcard</w>

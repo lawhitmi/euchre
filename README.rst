@@ -36,7 +36,8 @@ Continuous Delivery
 
 IDE (favorite key shortcuts?)
 ===========
-
+Shift-F10 - run
+Shift-F9 - debug
 
 DSL
 ===========

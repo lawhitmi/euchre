@@ -1,28 +1,35 @@
 COLORCODE = {'Spades': 'black', 'Clubs': 'black', 'Diamonds': 'red', 'Hearts': 'red'}
 
+
 class Card:
-    def __init__(self, facevalue, suit, roundvalue):
+    def __init__(self, facevalue, suit, basevalue):
         self.facevalue = facevalue
         self.suit = suit
-        self.roundvalue = roundvalue
-        self.basevalue = roundvalue
+        self.basevalue = basevalue
+        self.roundvalue = basevalue
         self.color = self.getColor()
 
     def getValue(self):
         return self.roundvalue
 
-    def setValue(self, trumpsuit="", leadsuit="", resetval=False):
+    def setValue(self, trumpsuit=None, leadsuit=None, resetval=False, evaltrumpsuit=False, basevaluereset=False):
         """
 
+        :param basevaluereset:
+        :param evaltrumpsuit:
         :param trumpsuit:
         :param leadsuit:
         :param resetval:
         :return:
         """
-        if resetval:
+
+        if basevaluereset:
             self.roundvalue = self.basevalue
 
-        if trumpsuit:
+        if resetval and self.suit != trumpsuit and not (self.facevalue == 'J' and self.color == COLORCODE[trumpsuit]):
+            self.roundvalue = self.basevalue
+
+        if evaltrumpsuit:
             if self.suit == trumpsuit:
                 self.roundvalue += 14
                 # Right Bower
@@ -39,14 +46,12 @@ class Card:
     def getColor(self):
         return COLORCODE[self.suit]
 
-    def isSameSuit(self, card, trump):
+    def getSuit(self):
         """
-        This method is used to determine if a card has the same suit as the `self` card
-        :param trump:
-        :param card: Card to compare to
-        :return:
+
+        :return: card suit
         """
-        # TODO Implement this method to check when a card must be played
+        return self.suit
 
     def __repr__(self):
         return str((self.facevalue, self.suit))

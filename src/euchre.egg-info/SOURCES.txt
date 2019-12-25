@@ -1,6 +1,8 @@
+.coverage
 .coveragerc
 .gitattributes
 .gitignore
+.sonarcloud.properties
 .travis.yml
 AUTHORS.rst
 CHANGELOG.rst
@@ -10,6 +12,7 @@ build.gradle.kts
 gradlew
 gradlew.bat
 requirements.txt
+runTests.sh
 settings.gradle.kts
 setup.cfg
 setup.py
@@ -30,14 +33,17 @@ docs/license.rst
 docs/_static/.gitignore
 gradle/wrapper/gradle-wrapper.jar
 gradle/wrapper/gradle-wrapper.properties
+src/euchre/.coverage
 src/euchre/__init__.py
 src/euchre/card.py
 src/euchre/deck.py
 src/euchre/euchre.py
 src/euchre/hands.py
+src/euchre/table.py
 src/euchre.egg-info/PKG-INFO
 src/euchre.egg-info/SOURCES.txt
 src/euchre.egg-info/dependency_links.txt
+src/euchre.egg-info/entry_points.txt
 src/euchre.egg-info/not-zip-safe
 src/euchre.egg-info/requires.txt
 src/euchre.egg-info/top_level.txt
@@ -45,5 +51,9 @@ src/euchre/__pycache__/__init__.cpython-37.pyc
 src/euchre/__pycache__/card.cpython-37.pyc
 src/euchre/__pycache__/deck.cpython-37.pyc
 src/euchre/__pycache__/hands.cpython-37.pyc
+tests/.coverage
+tests/__init__.py
 tests/conftest.py
-tests/test_skeleton.py
+tests/test_card.py
+tests/test_deck.py
+tests/test_euchre.py
