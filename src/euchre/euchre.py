@@ -16,10 +16,6 @@ def pickDealer():
 
 
 def game():
-    """
-
-    :return:
-    """
     deck = CardDeck()
     dealermask = pickDealer()
     user = UserHand(dealerflag=dealermask[0], cards=deck.deal(player='y'))
