@@ -44,12 +44,11 @@ def game():
         user.setValues(trumpsuit=trumpsuit, evaltrumpsuit=True)
         computer.setValues(trumpsuit=trumpsuit, evaltrumpsuit=True)
         maker.setMaker()
-        tricks = {user: 0, computer: 0}
+
         trickwinner, points = trickPhase(nondealer, dealer, trumpsuit, table)
         table.tricks[trickwinner] += points
-        # tricks[trickwinner] += points
-        print(tricks[trickwinner])
-        if tricks[trickwinner] >= 10:
+        print(table.tricks[trickwinner])
+        if table.tricks[trickwinner] >= 10:
             # TODO create declare winner screen
             print(str(trickwinner.name) + 'wins!')
             break
@@ -111,6 +110,7 @@ def trickPhase(firstplayer, secondplayer, trump, table, score={}):
     table.showTable(score=score)
     card1 = firstplayer.trickDecide(trumpsuit=trump)
     firstplayer.setValues(trumpsuit=trump, leadsuit=card1.getSuit())
+    card1.setValue(trumpsuit=trump, leadsuit=card1.getSuit())
     table.showTable(card1, score=score)
     card2 = secondplayer.trickDecide(trumpsuit=trump, playedcard=card1)
     firstplayer.setValues(trumpsuit=trump, resetval=True)

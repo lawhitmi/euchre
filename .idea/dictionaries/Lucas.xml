@@ -2,9 +2,11 @@
   <dictionary name="Lucas">
     <words>
       <w>basevalue</w>
+      <w>basevaluereset</w>
       <w>bidcard</w>
       <w>carddict</w>
       <w>cardindex</w>
+      <w>cardinstance</w>
       <w>cardtoplay</w>
       <w>colorcode</w>
       <w>dealerflag</w>

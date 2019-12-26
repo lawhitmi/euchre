@@ -40,7 +40,7 @@ class Card:
                 self.roundvalue += 18
 
         if leadsuit:
-            if trumpsuit != leadsuit:
+            if trumpsuit != leadsuit and leadsuit == self.suit:
                 self.roundvalue += 7
 
     def getColor(self):
@@ -54,7 +54,7 @@ class Card:
         return self.suit
 
     def __repr__(self):
-        return str((self.facevalue, self.suit))
+        return str((self.facevalue, self.suit, self.roundvalue)) # TODO remove roundvalue here, just for trobleshooting
 
     def __gt__(self, othercard):
         return self.roundvalue > othercard.roundvalue

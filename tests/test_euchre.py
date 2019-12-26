@@ -1,4 +1,4 @@
-from src.euchre.euchre import pickDealer, game
+from src.euchre.euchre import pickDealer, game, checkForWinner
 
 
 def test_pickDealer():
@@ -7,8 +7,12 @@ def test_pickDealer():
     assert x != y
 
 
-def test_Euchre():
-    #game()
+def test_checkForWinner():
+    NotImplemented
+
+
+def test_game():
+    # game()
     NotImplemented
 
 

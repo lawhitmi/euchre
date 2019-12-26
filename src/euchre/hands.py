@@ -35,8 +35,7 @@ class Hand:
         return self.cards.pop(cardindex)
 
     def __repr__(self):
-        """Overloads str() operator
-        """
+        """Overloads str() operator"""
         cardString = ""
         for i in self.cards:
             cardString = cardString + str(i) + str(self.cards[i])
