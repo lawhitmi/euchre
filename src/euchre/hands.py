@@ -7,12 +7,23 @@ class Hand:
         self.maker = makerflag
 
     def setValues(self, trumpsuit=None, leadsuit=None, resetval=False, evaltrumpsuit=False, basevaluereset=False):
-        """Recalculates the value of each card based on lead card and trump suit"""
+        """
+        Iterates through the cards and sets their round value based on the input conditions.
+        :param trumpsuit:
+        :param leadsuit: suit of the card played by the other player in a trick
+        :param resetval: 'soft' reset which doesn't affect trumpsuited cards
+        :param evaltrumpsuit: triggers card valuation using trump suit
+        :param basevaluereset: 'hard' reset
+        """
         for i in self.cards:
             self.cards[i].setValue(trumpsuit=trumpsuit, leadsuit=leadsuit, resetval=resetval,
                                    evaltrumpsuit=evaltrumpsuit, basevaluereset=basevaluereset)
 
     def setCards(self, carddict):
+        """
+        Sets the dictionary of cards
+        :param carddict: dict of Cards
+        """
         self.cards = carddict
 
     def setMaker(self):
@@ -27,11 +38,7 @@ class Hand:
         self.maker = False
 
     def playCard(self, cardindex):
-        """Plays card from the `cards` removes from deck, and returns the Card instance
-        
-        Input:
-        cardindex: key value in `cards` dict
-        """
+        """Pops and returns the card at the given index"""
         return self.cards.pop(cardindex)
 
     def __repr__(self):
@@ -43,8 +50,7 @@ class Hand:
 
 
 class UserHand(Hand):
-    """Controls the Player's hand
-    """
+    """Controls the Player's hand"""
 
     def __init__(self, cards={}, dealerflag=False, makerflag=False):
         super().__init__(cards, dealerflag, makerflag)
