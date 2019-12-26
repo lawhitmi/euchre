@@ -92,12 +92,12 @@ def bidPhase(nondealer, dealer, bidcard, table):
         elif dealerDec == 'pass':
             table.flipBidcard()
             table.showTable()
-            nonDealDec = nondealer.bidDecide(rnd=2)
+            nonDealDec = nondealer.bidDecide(rnd=2, excludesuit=bidcard.getSuit())
             if nonDealDec != 'pass':
                 return tuple((nonDealDec, nondealer))
             else:
                 table.showTable()
-                dealerDec = dealer.bidDecide(rnd=2)
+                dealerDec = dealer.bidDecide(rnd=2, excludesuit=bidcard.getSuit())
                 return tuple((dealerDec, dealer))
 
 

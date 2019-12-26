@@ -50,7 +50,7 @@ class UserHand(Hand):
         super().__init__(cards, dealerflag, makerflag)
         self.name="Player"  # needed to make object hashable for key in dict
 
-    def bidDecide(self, bidcard=None, rnd=1):
+    def bidDecide(self, bidcard=None, rnd=1, excludesuit=None):
         if rnd == 1:
             if not self.dealer:
                 while True:
@@ -80,7 +80,6 @@ class UserHand(Hand):
                         continue
                     else:
                         break
-                # TODO when dealer accepts, he must pick up the card and discard one.  Need to implement this
                 if decision == 1:
                     cardtodiscard = int(input('Which card would you like to discard?'))
                     self.cards[cardtodiscard] = bidcard
@@ -88,38 +87,45 @@ class UserHand(Hand):
                 elif decision == 2:
                     return 'pass'
         elif rnd == 2:
+            suitlist = ['Spades', 'Clubs', "Diamonds", 'Hearts']
+            suitlist.remove(excludesuit)
+            suitsstring = ""
+            option = 2
+            for i in suitlist:
+                suitsstring += '(' + str(option) + '):' + str(i) + ' '
+                option += 1
+
             if not self.dealer:
                 while True:
                     try:
-                        # TODO THIS needs to be updated to work dynamically since you cannot choose the trump suit from the first round of bidding
-                        decision = int(input(
-                            'Input (1) to Pass, or choose a trump suit (2):Hearts, (3):Diamonds, (4):Spades, (5):Clubs'))
-                        if decision not in [1, 2, 3, 4, 5]:
+                        trumpselectstring = 'Input (1) to Pass, or choose a trump suit '
+
+                        decision = int(input(trumpselectstring+suitsstring))
+                        if decision not in [1, 2, 3, 4]:
                             raise ValueError
                     except ValueError:
                         print('Sorry, please provide a valid input...')
                         continue
                     else:
                         break
-                respDict = {2: 'Hearts', 3: 'Diamonds', 4: 'Spades', 5: 'Clubs'}
                 if decision == 1:
                     return 'pass'
                 else:
-                    return respDict[decision]
+                    return suitlist[decision-2]
             elif self.dealer:
                 while True:
                     try:
-                        # TODO THIS needs to be updated to work dynamically since you cannot choose the trump suit from the first round of bidding
-                        decision = int(input('Choose a trump suit (1):Hearts, (2):Diamonds, (3):Spades, (4):Clubs'))
-                        if decision not in [1, 2, 3, 4, 5]:
+                        trumpselectstring = 'Choose a trump suit: '
+                        decision = int(input(trumpselectstring+suitsstring))
+                        if decision not in [2, 3, 4]:
                             raise ValueError
                     except ValueError:
                         print('Sorry, please provide a valid input...')
                         continue
                     else:
                         break
-                respDict = {1: 'Hearts', 2: 'Diamonds', 3: 'Spades', 4: 'Clubs'}
-                return respDict[decision]
+
+                return suitlist[decision-2]
 
     def trickDecide(self, trumpsuit, playedcard=None):
         # TODO add a check here to make sure that the user plays the matching suit if possible

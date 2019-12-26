@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b904eb0d-1452-4ccc-8ca4-941c129b6a27" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Lucas.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Lucas.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/euchre.egg-info/PKG-INFO" beforeDir="false" afterPath="$PROJECT_DIR$/src/euchre.egg-info/PKG-INFO" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/euchre/card.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/euchre/card.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/euchre/euchre.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/euchre/euchre.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/euchre/hands.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/euchre/hands.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_euchre.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_euchre.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -225,7 +224,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577308018214</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Fixed scoring issues.">
+      <created>1577366422539</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1577366422540</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -289,17 +295,7 @@
     <MESSAGE value="Adding additional sonarcloud badges" />
     <MESSAGE value="Large dump to update files" />
     <MESSAGE value="2nd Large dump to update files." />
-    <option name="LAST_COMMIT_MESSAGE" value="2nd Large dump to update files." />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/euchre/euchre.py</url>
-          <line>109</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Fixed scoring issues." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed scoring issues." />
   </component>
 </project>
