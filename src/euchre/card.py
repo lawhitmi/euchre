@@ -36,7 +36,7 @@ class Card:
                 if self.facevalue == 'J':
                     self.roundvalue += 5
             # Left Bower
-            elif self.facevalue == 'J' and self.color == COLORCODE[trumpsuit]:
+            elif self.facevalue == 'J' and self.color == COLORCODE.get(trumpsuit):
                 self.roundvalue += 18
 
         if leadsuit:

@@ -128,7 +128,6 @@ class UserHand(Hand):
                 return suitlist[decision-2]
 
     def trickDecide(self, trumpsuit, playedcard=None):
-        # TODO add a check here to make sure that the user plays the matching suit if possible
         if playedcard:
             self.setValues(trumpsuit=trumpsuit, leadsuit=playedcard.getSuit())
             mustplaykeys = []
@@ -175,12 +174,12 @@ class ComputerHand(Hand):
     """Controls the Computer's Hand
     """
 
-    def __init__(self, cards={}, dealerflag=False, makerFlag=False, mode='learn'):
+    def __init__(self, cards={}, dealerflag=False, makerFlag=False, mode='norm'):
         super().__init__(cards, dealerflag, makerFlag)
         self.playMode = mode
         self.name = "Computer"  # needed to make object hashable for key in dict
 
-    def calcHandVal(self, trumpsuit):
+    def calcHandVal(self, trumpsuit=None):
         if trumpsuit:
             self.setValues(trumpsuit=trumpsuit, evaltrumpsuit=True)
         else:
@@ -190,7 +189,7 @@ class ComputerHand(Hand):
             handVal += self.cards[i].roundvalue
         return handVal
 
-    def bidDecide(self, bidcard=None, rnd=1):
+    def bidDecide(self, bidcard=None, rnd=1, excludesuit=None):
         if bidcard:
             handVal = self.calcHandVal(bidcard.getSuit())
         else:
@@ -215,10 +214,22 @@ class ComputerHand(Hand):
                     print('Computer passes')
                     return 'pass'
         elif rnd == 2:
-            if not self.dealer:
-                # TODO method to evaluate hand for each remaining suit
-                print('Computer chooses: Spades')
-                return 'Spades'
+            suitlist = ['Spades', 'Clubs', "Diamonds", 'Hearts']
+            suitlist.remove(excludesuit)
+
+            handvalforeachsuit = {}
+            for i in suitlist:
+                handvalforeachsuit[i] = self.calcHandVal(trumpsuit=i)
+            highestsuit = max(handvalforeachsuit, key=lambda k: handvalforeachsuit[k])
+            if handvalforeachsuit[highestsuit] >= 45:  # magic number
+                print('Computer chooses: '+str(highestsuit))
+                return highestsuit
+            elif self.dealer:
+                print('Computer chooses: ' + str(highestsuit))
+                return highestsuit
+            else:
+                print('Computer passes')
+                return 'pass'
 
     def trickDecide(self, trumpsuit, playedcard=None):
         """

@@ -55,10 +55,10 @@ def game():
 
         # Reset everything for next round
         deck.shuffle()
+        userdealer = user.dealer
         user.clearHand()
         computer.clearHand()
-        dealermask = pickDealer()
-        if dealermask[0]:
+        if not userdealer:
             user.setDealer()
         else:
             computer.setDealer()
