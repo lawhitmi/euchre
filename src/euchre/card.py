@@ -40,7 +40,8 @@ class Card:
                 self.roundvalue += 18
 
         if leadsuit:
-            if trumpsuit != leadsuit and leadsuit == self.suit:
+            if trumpsuit != leadsuit and leadsuit == self.suit \
+                    and not (self.facevalue == 'J' and self.color == COLORCODE[trumpsuit]):
                 self.roundvalue += 7
 
     def getColor(self):

@@ -3,7 +3,7 @@ euchre
 ======
 
 
-Add a short description here!
+A simple game of two-handed Euchre for the command line.
 
 
 Description
@@ -26,6 +26,7 @@ Clean Code
 Build Management
 ===========
 Gradle
+
 Testing
 ===========
 

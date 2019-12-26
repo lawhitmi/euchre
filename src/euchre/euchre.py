@@ -37,7 +37,6 @@ def game():
             nondealer = user
 
         trumpsuit, maker = bidPhase(nondealer, dealer, bidcard, table)
-        # TODO BUG occasionally returns the wrong trump suit?  seen when 'accepting'
         table.setTrumpSuit(trumpsuit)
         user.setValues(basevaluereset=True)
         computer.setValues(basevaluereset=True)
@@ -47,10 +46,8 @@ def game():
 
         trickwinner, points = trickPhase(nondealer, dealer, trumpsuit, table)
         table.tricks[trickwinner] += points
-        print(table.tricks[trickwinner])
         if table.tricks[trickwinner] >= 10:
-            # TODO create declare winner screen
-            print(str(trickwinner.name) + 'wins!')
+            print(str(trickwinner.name) + ' wins!')
             break
 
         # Reset everything for next round
@@ -63,7 +60,8 @@ def game():
         else:
             computer.setDealer()
         table.clearTable()
-        table.setBidcard(deck.deal(player='n'))
+        bidcard = deck.deal(player='n')
+        table.setBidcard(bidcard)
         user.setCards(deck.deal(player='y'))
         computer.setCards(deck.deal(player='y'))
 
@@ -80,8 +78,8 @@ def bidPhase(nondealer, dealer, bidcard, table):
     table.showTable()
     nonDealDec = nondealer.bidDecide(bidcard=bidcard)
     if nonDealDec == 'order-up':
-        # TODO allow dealer the option to pick up the bidcard in this case
         table.flipBidcard()
+        dealer.pickUpBidcard(bidcard)
         return tuple((bidcard.suit, nondealer))
     elif nonDealDec == 'pass':
         table.showTable()
@@ -102,31 +100,39 @@ def bidPhase(nondealer, dealer, bidcard, table):
 
 
 def trickPhase(firstplayer, secondplayer, trump, table, score={}):
+
     if len(score) == 0:
         score = {firstplayer: 0, secondplayer: 0}
     winner = checkForWinner(score)
+
     if winner:
         return tuple((winner[0], winner[1]))
-    table.showTable(score=score)
-    card1 = firstplayer.trickDecide(trumpsuit=trump)
-    firstplayer.setValues(trumpsuit=trump, leadsuit=card1.getSuit())
-    card1.setValue(trumpsuit=trump, leadsuit=card1.getSuit())
-    table.showTable(card1, score=score)
-    card2 = secondplayer.trickDecide(trumpsuit=trump, playedcard=card1)
+
     firstplayer.setValues(trumpsuit=trump, resetval=True)
     secondplayer.setValues(trumpsuit=trump, resetval=True)
+
+    table.showTable(score=score)
+
+    card1 = firstplayer.trickDecide()
+
+    firstplayer.setValues(trumpsuit=trump, leadsuit=card1.getSuit())
+    card1.setValue(trumpsuit=trump, leadsuit=card1.getSuit())
+    secondplayer.setValues(trumpsuit=trump, leadsuit=card1.getSuit())
+
+    table.showTable(card1, score=score)
+
+    card2 = secondplayer.trickDecide(playedcard=card1)
+
     if card2 > card1:
         score[secondplayer] += 1
         table.showTable(card1, card2, score=score)
         time.sleep(1)
-
         trickwinner, points = trickPhase(secondplayer, firstplayer, trump, table, score)
         return tuple((trickwinner, points))
     else:
         score[firstplayer] += 1
         table.showTable(card1, card2, score=score)
         time.sleep(1)
-
         trickwinner, points = trickPhase(firstplayer, secondplayer, trump, table, score)
         return tuple((trickwinner, points))
 
