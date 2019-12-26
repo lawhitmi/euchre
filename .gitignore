@@ -4,6 +4,7 @@
 # Ignore Gradle build output directory
 build
 
-.vscode
-.idea
-/src/euchre.egg-info
+
+/.vscode/
+/src/euchre.egg-info/
+/.idea/

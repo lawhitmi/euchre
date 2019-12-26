@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b904eb0d-1452-4ccc-8ca4-941c129b6a27" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Lucas.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Lucas.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/euchre.egg-info/PKG-INFO" beforeDir="false" afterPath="$PROJECT_DIR$/src/euchre.egg-info/PKG-INFO" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/euchre/euchre.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/euchre/euchre.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/euchre/hands.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/euchre/hands.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -231,7 +229,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577366422540</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Updated hands.py to only allow selection of the remaining suits following a rejection of the bidcard">
+      <created>1577368022946</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1577368022946</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -296,6 +301,7 @@
     <MESSAGE value="Large dump to update files" />
     <MESSAGE value="2nd Large dump to update files." />
     <MESSAGE value="Fixed scoring issues." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed scoring issues." />
+    <MESSAGE value="Updated hands.py to only allow selection of the remaining suits following a rejection of the bidcard" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated hands.py to only allow selection of the remaining suits following a rejection of the bidcard" />
   </component>
 </project>

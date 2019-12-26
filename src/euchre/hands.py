@@ -131,16 +131,43 @@ class UserHand(Hand):
         # TODO add a check here to make sure that the user plays the matching suit if possible
         if playedcard:
             self.setValues(trumpsuit=trumpsuit, leadsuit=playedcard.getSuit())
-        while True:
-            try:
-                cardToPlay = int(input("Which card would you like to play? "))
-                if cardToPlay not in self.cards.keys():
-                    raise ValueError
-            except ValueError:
-                print('Sorry, please provide a valid input...')
-                continue
+            mustplaykeys = []
+            for i, j in self.cards.items():
+                if j.suit == playedcard.suit:
+                    mustplaykeys.append(i)
+            if len(mustplaykeys) > 0:
+                while True:
+                    try:
+                        cardToPlay = int(input("Which card would you like to play? "))
+                        if cardToPlay not in mustplaykeys:
+                            raise ValueError
+                    except ValueError:
+                        print('Sorry, please play card with the matching suit')
+                        continue
+                    else:
+                        break
             else:
-                break
+                while True:
+                    try:
+                        cardToPlay = int(input("Which card would you like to play? "))
+                        if cardToPlay not in self.cards.keys():
+                            raise ValueError
+                    except ValueError:
+                        print('Sorry, please provide a valid input...')
+                        continue
+                    else:
+                        break
+        else:
+            while True:
+                try:
+                    cardToPlay = int(input("Which card would you like to play? "))
+                    if cardToPlay not in self.cards.keys():
+                        raise ValueError
+                except ValueError:
+                    print('Sorry, please provide a valid input...')
+                    continue
+                else:
+                    break
         return self.playCard(cardToPlay)
 
 
@@ -201,14 +228,20 @@ class ComputerHand(Hand):
         :return:
         """
         cardtoplay = 0
+
         if playedcard:
             self.setValues(trumpsuit=trumpsuit, leadsuit=playedcard.getSuit())
+
             for i, j in self.cards.items():
-                if j.suit == playedcard.suit and j.roundvalue > playedcard.roundvalue:
+                if j.suit == playedcard.suit:
                     if cardtoplay != 0:
                         if cardtoplay.roundvalue > j.roundvalue:
-                            cardtoplay = j
-                            indextoplay = i
+                            if not (cardtoplay.roundvalue > playedcard.roundvalue):
+                                cardtoplay = j
+                                indextoplay = i
+                            elif j.roundvalue > playedcard.roundvalue:
+                                cardtoplay = j
+                                indextoplay = i
                     else:
                         cardtoplay = j
                         indextoplay = i
