@@ -1,3 +1,0 @@
-[console_scripts]
-euchre = euchre.euchre:game
-
