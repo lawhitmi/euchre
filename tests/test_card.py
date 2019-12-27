@@ -1,7 +1,7 @@
 from src.euchre.card import Card
 
 
-def test_Card():
+def test_card():
     cardinstance_9_spades = Card('9', 'Spades', 1)
     assert cardinstance_9_spades.get_color() == 'black'
 

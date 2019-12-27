@@ -135,17 +135,12 @@ def trick_phase(firstplayer, secondplayer, trump, table, score={}):
 
 def check_for_winner(score):
     for i, j in score.items():
-        if not i.maker:
-            if j == 3:
-                return tuple((i, 2))  # Euchred opponent
-        else:
-            if j == 5:
-                return tuple((i, 2))  # Maker took all 5
-
-    if sum(score.values()) == 5:
-        for i, j in score.items():
-            if j >= 3:
-                return tuple((i, 1))
+        if not i.maker and j == 3:
+            return tuple((i, 2))  # Euchred opponent
+        elif j == 5:
+            return tuple((i, 2))  # Maker took all 5
+        elif sum(score.values()) == 5 and j >= 3:
+            return tuple((i, 1))
 
 
 if __name__ == "__main__":

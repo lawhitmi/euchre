@@ -15,7 +15,7 @@ def test_deal():
     del testDeck
 
 
-def test_buildDeck():
+def test_build_deck():
     testDeck = CardDeck()
     assert isinstance(testDeck.buildDeck(), dict)
     assert len(testDeck.buildDeck()) == 24
