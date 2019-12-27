@@ -55,8 +55,10 @@ class UserHand(Hand):
     def __init__(self, cards={}, dealerflag=False, makerflag=False):
         super().__init__(cards, dealerflag, makerflag)
         self.name = "Player"
+        self.providevalidinputstring = 'Sorry, please provide a valid input...'
 
     def bidDecide(self, bidcard=None, rnd=1, excludesuit=None):
+
         if rnd == 1:
             if not self.dealer:
                 while True:
@@ -65,7 +67,7 @@ class UserHand(Hand):
                         if decision not in [1, 2]:
                             raise ValueError
                     except ValueError:
-                        print('Sorry, please provide a valid input...')
+                        print(self.providevalidinputstring)
                         continue
                     else:
                         break
@@ -82,7 +84,7 @@ class UserHand(Hand):
                         if decision not in [1, 2]:
                             raise ValueError
                     except ValueError:
-                        print('Sorry, please provide a valid input...')
+                        print(self.providevalidinputstring)
                         continue
                     else:
                         break
@@ -110,7 +112,7 @@ class UserHand(Hand):
                         if decision not in [1, 2, 3, 4]:
                             raise ValueError
                     except ValueError:
-                        print('Sorry, please provide a valid input...')
+                        print(self.providevalidinputstring)
                         continue
                     else:
                         break
@@ -126,7 +128,7 @@ class UserHand(Hand):
                         if decision not in [2, 3, 4]:
                             raise ValueError
                     except ValueError:
-                        print('Sorry, please provide a valid input...')
+                        print(self.providevalidinputstring)
                         continue
                     else:
                         break
@@ -157,7 +159,7 @@ class UserHand(Hand):
                         if cardToPlay not in self.cards.keys():
                             raise ValueError
                     except ValueError:
-                        print('Sorry, please provide a valid input...')
+                        print(self.providevalidinputstring)
                         continue
                     else:
                         break
@@ -168,7 +170,7 @@ class UserHand(Hand):
                     if cardToPlay not in self.cards.keys():
                         raise ValueError
                 except ValueError:
-                    print('Sorry, please provide a valid input...')
+                    print(self.providevalidinputstring)
                     continue
                 else:
                     break
@@ -232,11 +234,8 @@ class ComputerHand(Hand):
             for i in suitlist:
                 handvalforeachsuit[i] = self.calcHandVal(trumpsuit=i)
             highestsuit = max(handvalforeachsuit, key=lambda k: handvalforeachsuit[k])
-            if handvalforeachsuit[highestsuit] >= 65:  # magic number
+            if handvalforeachsuit[highestsuit] >= 65 or self.dealer:  # magic number
                 print('Computer chooses: '+str(highestsuit))
-                return highestsuit
-            elif self.dealer:
-                print('Computer chooses: ' + str(highestsuit))
                 return highestsuit
             else:
                 print('Computer passes')
@@ -256,10 +255,8 @@ class ComputerHand(Hand):
                 if j.suit == playedcard.getSuit():
                     if cardtoplay != 0:
                         if cardtoplay.roundvalue > j.roundvalue:
-                            if not (cardtoplay.roundvalue > playedcard.roundvalue):
-                                cardtoplay = j
-                                indextoplay = i
-                            elif j.roundvalue > playedcard.roundvalue:
+                            if not (cardtoplay.roundvalue > playedcard.roundvalue) \
+                                    or j.roundvalue > playedcard.roundvalue:
                                 cardtoplay = j
                                 indextoplay = i
                     elif cardtoplay == 0:

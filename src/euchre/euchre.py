@@ -5,7 +5,7 @@ from .hands import ComputerHand, UserHand
 import time
 
 
-def pickDealer():
+def pick_dealer():
     """
 
     :return:
@@ -17,7 +17,7 @@ def pickDealer():
 
 def game():
     deck = CardDeck()
-    dealermask = pickDealer()
+    dealermask = pick_dealer()
     user = UserHand(dealerflag=dealermask[0], cards=deck.deal(player='y'))
     computer = ComputerHand(dealerflag=dealermask[1], cards=deck.deal(player='y'))
     bidcard = deck.deal(player='n')
@@ -32,7 +32,7 @@ def game():
             dealer = computer
             nondealer = user
 
-        trumpsuit, maker = bidPhase(nondealer, dealer, bidcard, table)
+        trumpsuit, maker = bid_phase(nondealer, dealer, bidcard, table)
         table.setTrumpSuit(trumpsuit)
         user.setValues(basevaluereset=True)
         computer.setValues(basevaluereset=True)
@@ -40,7 +40,7 @@ def game():
         computer.setValues(trumpsuit=trumpsuit, evaltrumpsuit=True)
         maker.setMaker()
 
-        trickwinner, points = trickPhase(nondealer, dealer, trumpsuit, table)
+        trickwinner, points = trick_phase(nondealer, dealer, trumpsuit, table)
         table.tricks[trickwinner] += points
         if table.tricks[trickwinner] >= 10:
             print(str(trickwinner.name) + ' wins!')
@@ -62,7 +62,7 @@ def game():
         computer.setCards(deck.deal(player='y'))
 
 
-def bidPhase(nondealer, dealer, bidcard, table):
+def bid_phase(nondealer, dealer, bidcard, table):
     """
 
     :param nondealer:
@@ -95,11 +95,11 @@ def bidPhase(nondealer, dealer, bidcard, table):
                 return tuple((dealerDec, dealer))
 
 
-def trickPhase(firstplayer, secondplayer, trump, table, score={}):
+def trick_phase(firstplayer, secondplayer, trump, table, score={}):
 
     if len(score) == 0:
         score = {firstplayer: 0, secondplayer: 0}
-    winner = checkForWinner(score)
+    winner = check_for_winner(score)
 
     if winner:
         return tuple((winner[0], winner[1]))
@@ -123,17 +123,17 @@ def trickPhase(firstplayer, secondplayer, trump, table, score={}):
         score[secondplayer] += 1
         table.showTable(card1, card2, score=score)
         time.sleep(1)
-        trickwinner, points = trickPhase(secondplayer, firstplayer, trump, table, score)
+        trickwinner, points = trick_phase(secondplayer, firstplayer, trump, table, score)
         return tuple((trickwinner, points))
     else:
         score[firstplayer] += 1
         table.showTable(card1, card2, score=score)
         time.sleep(1)
-        trickwinner, points = trickPhase(firstplayer, secondplayer, trump, table, score)
+        trickwinner, points = trick_phase(firstplayer, secondplayer, trump, table, score)
         return tuple((trickwinner, points))
 
 
-def checkForWinner(score):
+def check_for_winner(score):
     for i, j in score.items():
         if not i.maker:
             if j == 3:

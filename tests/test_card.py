@@ -3,7 +3,7 @@ from src.euchre.card import Card
 
 def test_Card():
     cardinstance_9_spades = Card('9', 'Spades', 1)
-    assert cardinstance_9_spades.getColor() == 'black'
+    assert cardinstance_9_spades.get_color() == 'black'
 
     # Check initial value
     assert cardinstance_9_spades.getValue() == 1
