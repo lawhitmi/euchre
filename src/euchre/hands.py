@@ -1,3 +1,20 @@
+def get_user_response(question, valid_responses, error_message=None):
+    while True:
+        try:
+            decision = int(input(question))
+            if decision not in valid_responses:
+                raise ValueError
+        except ValueError:
+            if error_message:
+                print(error_message)
+            else:
+                print('Sorry, please provide a valid input....')
+            continue
+        else:
+            break
+    return decision
+
+
 class Hand:
     """Superclass"""
 
@@ -41,6 +58,13 @@ class Hand:
         """Pops and returns the card at the given index"""
         return self.cards.pop(cardindex)
 
+    def get_cards_matching_suit(self, suit):
+        mustplaykeys = []
+        for i, j in self.cards.items():
+            if j.suit == suit:
+                mustplaykeys.append(i)
+        return mustplaykeys
+
     def __repr__(self):
         """Overloads str() operator"""
         cardString = ""
@@ -55,45 +79,26 @@ class UserHand(Hand):
     def __init__(self, cards={}, dealerflag=False, makerflag=False):
         super().__init__(cards, dealerflag, makerflag)
         self.name = "Player"
-        self.providevalidinputstring = 'Sorry, please provide a valid input...'
 
     def bidDecide(self, bidcard=None, rnd=1, excludesuit=None):
 
         if rnd == 1:
             if not self.dealer:
-                while True:
-                    try:
-                        decision = int(input('Press (1) to Order Up or (2) to Pass: '))
-                        if decision not in [1, 2]:
-                            raise ValueError
-                    except ValueError:
-                        print(self.providevalidinputstring)
-                        continue
-                    else:
-                        break
-
+                decision = get_user_response('Press (1) to Order Up or (2) to Pass: ', [1, 2])
                 if decision == 1:
                     return 'order-up'
                 elif decision == 2:
                     return 'pass'
 
             elif self.dealer:
-                while True:
-                    try:
-                        decision = int(input('Press (1) to Accept or (2) to Pass: '))
-                        if decision not in [1, 2]:
-                            raise ValueError
-                    except ValueError:
-                        print(self.providevalidinputstring)
-                        continue
-                    else:
-                        break
+                decision = get_user_response('Press (1) to Accept or (2) to Pass: ', [1, 2])
                 if decision == 1:
-                    cardtodiscard = int(input('Which card would you like to discard?'))
+                    cardtodiscard = get_user_response('Which card would you like to discard?', [1, 2, 3, 4, 5])
                     self.cards[cardtodiscard] = bidcard
                     return 'accept'
                 elif decision == 2:
                     return 'pass'
+
         elif rnd == 2:
             suitlist = ['Spades', 'Clubs', "Diamonds", 'Hearts']
             suitlist.remove(excludesuit)
@@ -104,76 +109,29 @@ class UserHand(Hand):
                 option += 1
 
             if not self.dealer:
-                while True:
-                    try:
-                        trumpselectstring = 'Input (1) to Pass, or choose a trump suit '
+                decision = get_user_response('Input (1) to Pass, or choose a trump suit ' + suitsstring, [1, 2, 3, 4])
 
-                        decision = int(input(trumpselectstring+suitsstring))
-                        if decision not in [1, 2, 3, 4]:
-                            raise ValueError
-                    except ValueError:
-                        print(self.providevalidinputstring)
-                        continue
-                    else:
-                        break
                 if decision == 1:
                     return 'pass'
                 else:
-                    return suitlist[decision-2]
+                    return suitlist[decision - 2]
             elif self.dealer:
-                while True:
-                    try:
-                        trumpselectstring = 'Choose a trump suit: '
-                        decision = int(input(trumpselectstring+suitsstring))
-                        if decision not in [2, 3, 4]:
-                            raise ValueError
-                    except ValueError:
-                        print(self.providevalidinputstring)
-                        continue
-                    else:
-                        break
-
-                return suitlist[decision-2]
+                decision = get_user_response('Choose a trump suit: ' + suitsstring, [1, 2, 3, 4])
+                return suitlist[decision - 2]
 
     def trickDecide(self, playedcard=None):
+
         if playedcard:
-            mustplaykeys = []
-            for i, j in self.cards.items():
-                if j.suit == playedcard.suit:
-                    mustplaykeys.append(i)
-            if len(mustplaykeys) > 0:
-                while True:
-                    try:
-                        cardToPlay = int(input("Which card would you like to play? "))
-                        if cardToPlay not in mustplaykeys:
-                            raise ValueError
-                    except ValueError:
-                        print('Sorry, please play card with the matching suit')
-                        continue
-                    else:
-                        break
-            else:
-                while True:
-                    try:
-                        cardToPlay = int(input("Which card would you like to play? "))
-                        if cardToPlay not in self.cards.keys():
-                            raise ValueError
-                    except ValueError:
-                        print(self.providevalidinputstring)
-                        continue
-                    else:
-                        break
+            mustplaykeys = self.get_cards_matching_suit(playedcard.getSuit())
         else:
-            while True:
-                try:
-                    cardToPlay = int(input("Which card would you like to play? "))
-                    if cardToPlay not in self.cards.keys():
-                        raise ValueError
-                except ValueError:
-                    print(self.providevalidinputstring)
-                    continue
-                else:
-                    break
+            mustplaykeys = []
+
+        if len(mustplaykeys) > 0:
+            cardToPlay = get_user_response("Which card would you like to play? ",
+                                           mustplaykeys, 'Sorry, please play card with the matching suit')
+        else:
+            cardToPlay = get_user_response("Which card would you like to play? ", self.cards.keys())
+
         return self.playCard(cardToPlay)
 
     def pickUpBidcard(self, bidcard):
@@ -235,7 +193,7 @@ class ComputerHand(Hand):
                 handvalforeachsuit[i] = self.calcHandVal(trumpsuit=i)
             highestsuit = max(handvalforeachsuit, key=lambda k: handvalforeachsuit[k])
             if handvalforeachsuit[highestsuit] >= 65 or self.dealer:  # magic number
-                print('Computer chooses: '+str(highestsuit))
+                print('Computer chooses: ' + str(highestsuit))
                 return highestsuit
             else:
                 print('Computer passes')
@@ -244,40 +202,35 @@ class ComputerHand(Hand):
     def trickDecide(self, playedcard=None):
         """
 
-        :param trumpsuit:
         :param playedcard:
         :return:
         """
-        cardtoplay = 0
+
         # TODO Check this logic, played a right bower on a nonsuited lead, with other lower cards in hand
         if playedcard:
-            for i, j in self.cards.items():
-                if j.suit == playedcard.getSuit():
-                    if cardtoplay != 0:
-                        if cardtoplay.roundvalue > j.roundvalue:
-                            if not (cardtoplay.roundvalue > playedcard.roundvalue) \
-                                    or j.roundvalue > playedcard.roundvalue:
-                                cardtoplay = j
-                                indextoplay = i
-                    elif cardtoplay == 0:
-                        cardtoplay = j
+            must_play_cards = self.get_cards_matching_suit(playedcard.getSuit())
+
+            if len(must_play_cards) > 0:
+                indextoplay = must_play_cards[0]
+                cardtoplay = self.cards[indextoplay]
+                for i in must_play_cards:
+                    if (cardtoplay.roundvalue > self.cards[i].roundvalue and (
+                                not (cardtoplay.roundvalue > playedcard.roundvalue)
+                                or self.cards[i].roundvalue > playedcard.roundvalue)):
+                        cardtoplay = self.cards[i]
                         indextoplay = i
-            if cardtoplay != 0:
+
                 return self.playCard(indextoplay)
             else:
-                cardtoplay = 0
-                indextoplay = 0
+                indextoplay = list(self.cards.keys())[0]
+                cardtoplay = self.cards[indextoplay]
+
                 for i, j in self.cards.items():
-                    if not cardtoplay:
+                    if (j.roundvalue > playedcard.roundvalue and not (cardtoplay.roundvalue > playedcard.roundvalue)) or \
+                            (j.roundvalue < cardtoplay.roundvalue and not (cardtoplay.roundvalue > playedcard.roundvalue)):
                         cardtoplay = j
                         indextoplay = i
-                    elif j.roundvalue > playedcard.roundvalue and not (cardtoplay.roundvalue > playedcard.roundvalue):
-                        cardtoplay = j
-                        indextoplay = i
-                    elif j.roundvalue < cardtoplay.roundvalue and not (cardtoplay.roundvalue > playedcard.roundvalue):
-                        cardtoplay = j
-                        indextoplay = i
-                return  self.playCard(indextoplay)
+                return self.playCard(indextoplay)
         else:
             return self.playCard(self.findHighestCard())
 
@@ -313,4 +266,3 @@ class ComputerHand(Hand):
             return cardString
         elif self.playMode == 'learn':
             return super(ComputerHand, self).__repr__()
-
