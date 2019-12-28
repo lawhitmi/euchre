@@ -61,10 +61,10 @@ Travis-CI was used to automate build and testing tasks with each push to github.
 
 Pycharm was used for this project.
 
-Ctrl-k - commit, followed by Ctrl-Alt-k for 'Commit and Push'
-Shift-F10 - run
-Shift-F9 - debug
-Ctrl-Alt-Shift-T - opens refactor dialog
+ * Ctrl-k - commit, followed by Ctrl-Alt-k for 'Commit and Push'
+ * Shift-F10 - run
+ * Shift-F9 - debug
+ * Ctrl-Alt-Shift-T - opens refactor dialog
 
 DSL
 ===========
