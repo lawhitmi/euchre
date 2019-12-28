@@ -144,8 +144,8 @@ class ComputerHand(Hand):
     """Controls the Computer's Hand
     """
 
-    def __init__(self, cards={}, dealerflag=False, makerFlag=False, mode='learn'):
-        super().__init__(cards, dealerflag, makerFlag)
+    def __init__(self, cards={}, dealerflag=False, makerflag=False, mode='learn'):
+        super().__init__(cards, dealerflag, makerflag)
         self.playMode = mode
         self.name = "Computer"  # needed to make object hashable for key in dict
 
