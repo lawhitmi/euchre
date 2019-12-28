@@ -27,9 +27,13 @@ Clean Code
     repeated.  One such instance was my code to solicit input from the user.  I originally had several similar try-catch
     statements which I pulled out into a single function.
     Link to function: https://github.com/lawhitmi/euchre/blob/a9721b79ddac1d64d1000cb292d8ba878371a76a/src/euchre/hands.py#L1
+
  #. Source Code Conventions - `PEP8 <https://www.python.org/dev/peps/pep-0008/>`__
+
  #.
+
  #.
+
  #.
 
 
