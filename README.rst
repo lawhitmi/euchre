@@ -22,6 +22,13 @@ Metrics
 
 Clean Code
 ===========
+1. Don't Repeat Yourself (DRY) - https://github.com/lawhitmi/euchre/blob/a9721b79ddac1d64d1000cb292d8ba878371a76a/src/euchre/hands.py#L1
+2. Source Code Conventions - PEP8_
+.. _PEP8: https://www.python.org/dev/peps/pep-0008/
+3.
+4.
+5.
+
 
 Build Management
 ===========
