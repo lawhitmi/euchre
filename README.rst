@@ -1,25 +1,36 @@
 ======
-euchre
+Euchre
 ======
 
-
 A simple game of two-handed Euchre for the command line.
-
 
 Description
 ===========
 
-A longer description of your project goes here...
+This project was created for an Advanced Software Engineering class to learn about and apply several aspects of the
+software design process.
+
+Euchre is a simple card game played with a 24 card deck (9 through Ace of each suit).  The objective of the game is to
+play higher cards to win 'tricks'.  The first player to 10 'tricks' wins.  For further information on how the game is
+played, visit `this website <https://www.thesprucecrafts.com/twohanded-euchre-card-game-rules-411489>`__.
 
 1. UML
 ===========
 
+NEED ONE SENTENCE HERE WITH LINKS TO THE UML DIAGRAMS.
+
+NEED A FEW SENTENCES HERE.
 
 2. Metrics
 ===========
 .. image:: https://sonarcloud.io/api/project_badges/measure?project=lawhitmi_euchre&metric=alert_status
 .. image:: https://sonarcloud.io/api/project_badges/measure?project=lawhitmi_euchre&metric=sqale_index
 .. image:: https://sonarcloud.io/api/project_badges/measure?project=lawhitmi_euchre&metric=code_smells
+
+Sonarcloud.io was used for this project.  See the .sonarcloud.properties file in the root of the project for details
+about use.
+
+NEED A FEW SENTENCES HERE.
 
 3. Clean Code
 ===========
@@ -37,17 +48,24 @@ A longer description of your project goes here...
 
  #.
 
+NEED A LINK HERE TO YOUR CHEATSHEET WITH 10 PRINCIPLES.
 
 4. Build Management
 ===========
 
 Setuptools was used for this project due to its excellent integration with the python build and test processes.
-Gradle
+
+I had originally installed Gradle to perform the build management tasks for this projects, but found little documentation
+on its use with Python packages.  In my attempt to use Gradle, I found I was creating scripts to run Setuptools build
+and testing commands. This added layer of scripts seemed to be a inefficient method of performing the build management.
+For this reason, I fell back on Setuptools.
 
 5. Testing
 ===========
 
 Pytest was used to automate testing for this project.
+
+NEED A FEW SENTENCES HERE.
 
 6. Continuous Delivery
 ===========
@@ -55,6 +73,7 @@ Travis-CI was used to automate build and testing tasks with each push to github.
 
 .. image:: https://travis-ci.org/lawhitmi/euchre.svg?branch=master
 
+NEED A FEW SENTENCES HERE.
 
 7. IDE
 ===========
@@ -66,12 +85,18 @@ Pycharm was used for this project.
  * Shift-F9 - debug
  * Ctrl-Alt-Shift-T - opens refactor dialog
 
-DSL
+NEED A FEW SENTENCES HERE.
+
+8. DSL
 ===========
 https://github.com/lawhitmi/hello-world
 
-Functional Programming
+NEED A FEW SENTENCES HERE.
+
+9. Functional Programming
 ===========
+
+NEED A FEW SENTENCES HERE.
 
 OPTIONAL-Logical Solver
 ===========
