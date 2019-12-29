@@ -84,6 +84,8 @@ Pycharm was used for this project.
  * Shift-F10 - run
  * Shift-F9 - debug
  * Ctrl-Alt-Shift-T - opens refactor dialog
+ * Ctrl-Tab - File switcher
+ * Alt-(number) - Switch to other IDE elements
 
 NEED A FEW SENTENCES HERE.
 
