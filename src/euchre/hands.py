@@ -61,7 +61,7 @@ class Hand:
     def get_cards_matching_suit(self, suit):
         mustplaykeys = []
         for i, j in self.cards.items():
-            if j.suit == suit:
+            if j.suit == suit:  # TODO update this so that the left bower matches the suit
                 mustplaykeys.append(i)
         return mustplaykeys
 
@@ -186,8 +186,6 @@ class ComputerHand(Hand):
         elif rnd == 2:
             suitlist = ['Spades', 'Clubs', "Diamonds", 'Hearts']
             suitlist.remove(excludesuit)
-            # TODO this logic works, but one bower can cause the computer to choose a suit that it only has one of.
-            #  Also doesn't take into account the bidcard
             handvalforeachsuit = {}
             for i in suitlist:
                 handvalforeachsuit[i] = self.calcHandVal(trumpsuit=i)
@@ -206,31 +204,30 @@ class ComputerHand(Hand):
         :return:
         """
 
-        # TODO Check this logic, played a right bower on a nonsuited lead, with other lower cards in hand
         if playedcard:
+            # Chooses card with lowest value that still wins, or plays the card with the lowest value overall
             must_play_cards = self.get_cards_matching_suit(playedcard.getSuit())
-
+            min_val = 100
+            winner_min_val = 100
+            winner_index = -1
             if len(must_play_cards) > 0:
-                indextoplay = must_play_cards[0]
-                cardtoplay = self.cards[indextoplay]
                 for i in must_play_cards:
-                    if (cardtoplay.roundvalue > self.cards[i].roundvalue and (
-                                not (cardtoplay.roundvalue > playedcard.roundvalue)
-                                or self.cards[i].roundvalue > playedcard.roundvalue)):
-                        cardtoplay = self.cards[i]
-                        indextoplay = i
+                    if winner_min_val > self.cards[i].roundvalue > playedcard.roundvalue:
+                        # Find lowest winning card, if available
+                        winner_index = i
+                        winner_min_val = self.cards[i].roundvalue
+                    if self.cards[i].roundvalue < min_val:
+                        # Find lowest card overall
+                        min_index = i
+                        min_val = self.cards[i].roundvalue
 
-                return self.playCard(indextoplay)
+                if winner_index != -1:
+                    return self.playCard(winner_index)
+                else:
+                    return self.playCard(min_index)
+
             else:
-                indextoplay = list(self.cards.keys())[0]
-                cardtoplay = self.cards[indextoplay]
-
-                for i, j in self.cards.items():
-                    if (j.roundvalue > playedcard.roundvalue and not (cardtoplay.roundvalue > playedcard.roundvalue)) or \
-                            (j.roundvalue < cardtoplay.roundvalue and not (cardtoplay.roundvalue > playedcard.roundvalue)):
-                        cardtoplay = j
-                        indextoplay = i
-                return self.playCard(indextoplay)
+                return self.playCard(self.findLowestCard())
         else:
             return self.playCard(self.findHighestCard())
 
