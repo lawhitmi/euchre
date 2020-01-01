@@ -188,6 +188,7 @@ class ComputerHand(Hand):
             suitlist.remove(excludesuit)
             handvalforeachsuit = {}
             for i in suitlist:
+                self.setValues(basevaluereset=True)
                 handvalforeachsuit[i] = self.calcHandVal(trumpsuit=i)
             highestsuit = max(handvalforeachsuit, key=lambda k: handvalforeachsuit[k])
             if handvalforeachsuit[highestsuit] >= 65 or self.dealer:  # magic number
