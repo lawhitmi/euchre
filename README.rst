@@ -73,7 +73,7 @@ NEED A FEW SENTENCES HERE.
 Travis-CI was used to automate build and testing tasks with each push to github.
 
 .. image:: https://travis-ci.org/lawhitmi/euchre.svg?branch=master
-.. image:: https://github.com/lawhitmi/euchre/workflows/Python%20Application/badge.svg
+.. image:: https://github.com/lawhitmi/euchre/workflows/Python%20application/badge.svg
 
 NEED A FEW SENTENCES HERE.
 
