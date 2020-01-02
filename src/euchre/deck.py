@@ -6,33 +6,33 @@ class CardDeck:
     """Controls deck and deals cards"""
 
     def __init__(self):
-        self.cardFaceValues = {'9': 1, '10': 2, 'J': 3, 'Q': 4, 'K': 5, 'A': 6}
-        self.cardSuits = ['Spades', 'Hearts', 'Clubs', 'Diamonds']
-        self.CardDict = self.buildDeck()
+        self.card_face_values = {'9': 1, '10': 2, 'J': 3, 'Q': 4, 'K': 5, 'A': 6}
+        self.card_suits = ['Spades', 'Hearts', 'Clubs', 'Diamonds']
+        self.card_dict = self.build_deck()
 
-    def buildDeck(self):
+    def build_deck(self):
         """Builds a dictionary of Card with proper face value and suits"""
-        deckDict = {}
+        deck_dict = {}
         i = 1
-        for faceValue in self.cardFaceValues:
-            for suit in self.cardSuits:
-                deckDict[i] = Card(faceValue, suit, self.cardFaceValues[faceValue])
+        for face_value in self.card_face_values:
+            for suit in self.card_suits:
+                deck_dict[i] = Card(face_value, suit, self.card_face_values[face_value])
                 i += 1
-        return deckDict
+        return deck_dict
 
     def shuffle(self):
-        self.CardDict = self.buildDeck()
+        self.card_dict = self.build_deck()
 
     def deal(self, player='y'):
         """Selects 5 randomized cards from CardDict and returns them as a Dict
         This action removes the cards from CardDict"""
         if player == 'y':
-            mask = sample(self.CardDict.keys(), 5)
+            mask = sample(self.card_dict.keys(), 5)
         elif player == 'n':
-            return self.CardDict.pop(sample(self.CardDict.keys(), 1)[0])
+            return self.card_dict.pop(sample(self.card_dict.keys(), 1)[0])
         hand = {}
         count = 1
         for i in mask:
-            hand[count] = self.CardDict.pop(i)
+            hand[count] = self.card_dict.pop(i)
             count += 1
         return hand

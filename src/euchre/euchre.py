@@ -18,17 +18,17 @@ def pick_dealer():
 def next_round_reset(deck, user, computer, table):
     deck.shuffle()
     userdealer = user.dealer
-    user.clearHand()
-    computer.clearHand()
+    user.clear_hand()
+    computer.clear_hand()
     if not userdealer:
-        user.setDealer()
+        user.set_dealer()
     else:
-        computer.setDealer()
-    table.clearTable()
+        computer.set_dealer()
+    table.clear_table()
     bidcard = deck.deal(player='n')
-    table.setBidcard(bidcard)
-    user.setCards(deck.deal(player='y'))
-    computer.setCards(deck.deal(player='y'))
+    table.set_bidcard(bidcard)
+    user.set_cards(deck.deal(player='y'))
+    computer.set_cards(deck.deal(player='y'))
 
 
 def game():
@@ -51,12 +51,12 @@ def game():
             nondealer = user
 
         trumpsuit, maker = bid_phase(nondealer, dealer, bidcard, table)
-        table.setTrumpSuit(trumpsuit)
-        user.setValues(basevaluereset=True)
-        computer.setValues(basevaluereset=True)
-        user.setValues(trumpsuit=trumpsuit, evaltrumpsuit=True)
-        computer.setValues(trumpsuit=trumpsuit, evaltrumpsuit=True)
-        maker.setMaker()
+        table.set_trumpsuit(trumpsuit)
+        user.set_values(basevaluereset=True)
+        computer.set_values(basevaluereset=True)
+        user.set_values(trumpsuit=trumpsuit, evaltrumpsuit=True)
+        computer.set_values(trumpsuit=trumpsuit, evaltrumpsuit=True)
+        maker.set_maker()
 
         trickwinner, points = trick_phase(nondealer, dealer, trumpsuit, table)
         table.tricks[trickwinner] += points
@@ -76,28 +76,28 @@ def bid_phase(nondealer, dealer, bidcard, table):
     :param table:
     :return:
     """
-    table.showTable()
-    nonDealDec = nondealer.bidDecide(bidcard=bidcard)
-    if nonDealDec == 'order-up':
-        table.flipBidcard()
-        dealer.pickUpBidcard(bidcard)
+    table.show_table()
+    non_dealer_decision = nondealer.bid_decide(bidcard=bidcard)
+    if non_dealer_decision == 'order-up':
+        table.flip_bidcard()
+        dealer.pickup_bidcard(bidcard)
         return tuple((bidcard.suit, nondealer))
-    elif nonDealDec == 'pass':
-        table.showTable()
-        dealerDec = dealer.bidDecide(bidcard=bidcard)
-        if dealerDec == 'accept':
-            table.flipBidcard()
+    elif non_dealer_decision == 'pass':
+        table.show_table()
+        dealer_decision = dealer.bid_decide(bidcard=bidcard)
+        if dealer_decision == 'accept':
+            table.flip_bidcard()
             return tuple((bidcard.suit, dealer))
-        elif dealerDec == 'pass':
-            table.flipBidcard()
-            table.showTable()
-            nonDealDec = nondealer.bidDecide(rnd=2, excludesuit=bidcard.getSuit())
-            if nonDealDec != 'pass':
-                return tuple((nonDealDec, nondealer))
+        elif dealer_decision == 'pass':
+            table.flip_bidcard()
+            table.show_table()
+            non_dealer_decision = nondealer.bid_decide(rnd=2, excludesuit=bidcard.get_suit())
+            if non_dealer_decision != 'pass':
+                return tuple((non_dealer_decision, nondealer))
             else:
-                table.showTable()
-                dealerDec = dealer.bidDecide(rnd=2, excludesuit=bidcard.getSuit())
-                return tuple((dealerDec, dealer))
+                table.show_table()
+                dealer_decision = dealer.bid_decide(rnd=2, excludesuit=bidcard.get_suit())
+                return tuple((dealer_decision, dealer))
 
 
 def trick_phase(firstplayer, secondplayer, trump, table, score={}):
@@ -109,30 +109,30 @@ def trick_phase(firstplayer, secondplayer, trump, table, score={}):
     if winner:
         return tuple((winner[0], winner[1]))
 
-    firstplayer.setValues(trumpsuit=trump, resetval=True)
-    secondplayer.setValues(trumpsuit=trump, resetval=True)
+    firstplayer.set_values(trumpsuit=trump, resetval=True)
+    secondplayer.set_values(trumpsuit=trump, resetval=True)
 
-    table.showTable(score=score)
+    table.show_table(score=score)
 
-    card1 = firstplayer.trickDecide()
+    card1 = firstplayer.trick_decide()
 
-    firstplayer.setValues(trumpsuit=trump, leadsuit=card1.getSuit())
-    card1.setValue(trumpsuit=trump, leadsuit=card1.getSuit())
-    secondplayer.setValues(trumpsuit=trump, leadsuit=card1.getSuit())
+    firstplayer.set_values(trumpsuit=trump, leadsuit=card1.get_suit())
+    card1.set_value(trumpsuit=trump, leadsuit=card1.get_suit())
+    secondplayer.set_values(trumpsuit=trump, leadsuit=card1.get_suit())
 
-    table.showTable(card1, score=score)
+    table.show_table(card1, score=score)
 
-    card2 = secondplayer.trickDecide(playedcard=card1)
+    card2 = secondplayer.trick_decide(playedcard=card1)
 
     if card2 > card1:
         score[secondplayer] += 1
-        table.showTable(card1, card2, score=score)
+        table.show_table(card1, card2, score=score)
         time.sleep(1)
         trickwinner, points = trick_phase(secondplayer, firstplayer, trump, table, score)
         return tuple((trickwinner, points))
     else:
         score[firstplayer] += 1
-        table.showTable(card1, card2, score=score)
+        table.show_table(card1, card2, score=score)
         time.sleep(1)
         trickwinner, points = trick_phase(firstplayer, secondplayer, trump, table, score)
         return tuple((trickwinner, points))

@@ -9,17 +9,17 @@ class Table:
         self.computer = computer
         self.user = user
         self.bidcard = bidcard
-        self.trumpSuit = ""
+        self.trumpsuit = ""
         self.tricks = {self.user: 0, self.computer: 0}
 
-    def showTable(self, playedcard1="", playedcard2="", score=None):
+    def show_table(self, playedcard1="", playedcard2="", score=None):
         """
         Prints the playing table, Computer Hand, Field, User Hand
         :return:
         """
         print("*"*80)
         print("Score: User " + str(self.tricks[self.user]) + " Computer " + str(self.tricks[self.computer])
-              + " Trump Suit: " + str(self.trumpSuit))
+              + " Trump Suit: " + str(self.trumpsuit))
         scoreline = ""
         if score:
             scoreline += "Hand Score: "
@@ -38,16 +38,16 @@ class Table:
             print("")
         print(self.user)
 
-    def flipBidcard(self):
+    def flip_bidcard(self):
         self.bidcard = ""
 
-    def setBidcard(self, card):
+    def set_bidcard(self, card):
         self.bidcard = card
 
-    def setTrumpSuit(self, suit):
-        self.trumpSuit = suit
+    def set_trumpsuit(self, suit):
+        self.trumpsuit = suit
 
-    def clearTable(self):
-        self.trumpSuit = ""
+    def clear_table(self):
+        self.trumpsuit = ""
         self.bidcard = ""
 

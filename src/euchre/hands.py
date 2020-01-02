@@ -23,7 +23,7 @@ class Hand:
         self.dealer = dealerflag
         self.maker = makerflag
 
-    def setValues(self, trumpsuit=None, leadsuit=None, resetval=False, evaltrumpsuit=False, basevaluereset=False):
+    def set_values(self, trumpsuit=None, leadsuit=None, resetval=False, evaltrumpsuit=False, basevaluereset=False):
         """
         Iterates through the cards and sets their round value based on the input conditions.
         :param trumpsuit:
@@ -33,28 +33,28 @@ class Hand:
         :param basevaluereset: 'hard' reset
         """
         for i in self.cards:
-            self.cards[i].setValue(trumpsuit=trumpsuit, leadsuit=leadsuit, resetval=resetval,
-                                   evaltrumpsuit=evaltrumpsuit, basevaluereset=basevaluereset)
+            self.cards[i].set_value(trumpsuit=trumpsuit, leadsuit=leadsuit, resetval=resetval,
+                                    evaltrumpsuit=evaltrumpsuit, basevaluereset=basevaluereset)
 
-    def setCards(self, carddict):
+    def set_cards(self, carddict):
         """
         Sets the dictionary of cards
         :param carddict: dict of Cards
         """
         self.cards = carddict
 
-    def setMaker(self):
+    def set_maker(self):
         self.maker = True
 
-    def setDealer(self):
+    def set_dealer(self):
         self.dealer = True
 
-    def clearHand(self):
+    def clear_hand(self):
         self.cards = ""
         self.dealer = False
         self.maker = False
 
-    def playCard(self, cardindex):
+    def play_card(self, cardindex):
         """Pops and returns the card at the given index"""
         return self.cards.pop(cardindex)
 
@@ -80,7 +80,7 @@ class UserHand(Hand):
         super().__init__(cards, dealerflag, makerflag)
         self.name = "Player"
 
-    def bidDecide(self, bidcard=None, rnd=1, excludesuit=None):
+    def bid_decide(self, bidcard=None, rnd=1, excludesuit=None):
 
         if rnd == 1:
             if not self.dealer:
@@ -119,10 +119,10 @@ class UserHand(Hand):
                 decision = get_user_response('Choose a trump suit: ' + suitsstring, [1, 2, 3, 4])
                 return suitlist[decision - 2]
 
-    def trickDecide(self, playedcard=None):
+    def trick_decide(self, playedcard=None):
 
         if playedcard:
-            mustplaykeys = self.get_cards_matching_suit(playedcard.getSuit())
+            mustplaykeys = self.get_cards_matching_suit(playedcard.get_suit())
         else:
             mustplaykeys = []
 
@@ -132,9 +132,9 @@ class UserHand(Hand):
         else:
             cardToPlay = get_user_response("Which card would you like to play? ", self.cards.keys())
 
-        return self.playCard(cardToPlay)
+        return self.play_card(cardToPlay)
 
-    def pickUpBidcard(self, bidcard):
+    def pickup_bidcard(self, bidcard):
         cardtodiscard = int(input('Select a card to replace, or press (6) to leave it.'))
         if cardtodiscard != 6:
             self.cards[cardtodiscard] = bidcard
@@ -149,21 +149,21 @@ class ComputerHand(Hand):
         self.playMode = mode
         self.name = "Computer"  # needed to make object hashable for key in dict
 
-    def calcHandVal(self, trumpsuit=None):
+    def calc_hand_value(self, trumpsuit=None):
         if trumpsuit:
-            self.setValues(trumpsuit=trumpsuit, evaltrumpsuit=True)
+            self.set_values(trumpsuit=trumpsuit, evaltrumpsuit=True)
         else:
-            self.setValues(basevaluereset=True)
+            self.set_values(basevaluereset=True)
         handVal = 0
         for i in self.cards:
             handVal += self.cards[i].roundvalue
         return handVal
 
-    def bidDecide(self, bidcard=None, rnd=1, excludesuit=None):
+    def bid_decide(self, bidcard=None, rnd=1, excludesuit=None):
         if bidcard:
-            handVal = self.calcHandVal(bidcard.getSuit())
+            handVal = self.calc_hand_value(bidcard.get_suit())
         else:
-            handVal = self.calcHandVal()
+            handVal = self.calc_hand_value()
 
         if rnd == 1:
             if not self.dealer:
@@ -176,8 +176,8 @@ class ComputerHand(Hand):
             elif self.dealer:
                 if handVal >= 48:
                     print('Computer accepts')
-                    self.setValues(trumpsuit=bidcard.suit, evaltrumpsuit=True)
-                    swapIndex = self.findLowestCard()
+                    self.set_values(trumpsuit=bidcard.suit, evaltrumpsuit=True)
+                    swapIndex = self.find_lowest_card()
                     self.cards[swapIndex] = bidcard
                     return 'accept'
                 else:
@@ -188,8 +188,8 @@ class ComputerHand(Hand):
             suitlist.remove(excludesuit)
             handvalforeachsuit = {}
             for i in suitlist:
-                self.setValues(basevaluereset=True)
-                handvalforeachsuit[i] = self.calcHandVal(trumpsuit=i)
+                self.set_values(basevaluereset=True)
+                handvalforeachsuit[i] = self.calc_hand_value(trumpsuit=i)
             highestsuit = max(handvalforeachsuit, key=lambda k: handvalforeachsuit[k])
             if handvalforeachsuit[highestsuit] >= 65 or self.dealer:  # magic number
                 print('Computer chooses: ' + str(highestsuit))
@@ -198,7 +198,7 @@ class ComputerHand(Hand):
                 print('Computer passes')
                 return 'pass'
 
-    def trickDecide(self, playedcard=None):
+    def trick_decide(self, playedcard=None):
         """
 
         :param playedcard:
@@ -207,7 +207,7 @@ class ComputerHand(Hand):
 
         if playedcard:
             # Chooses card with lowest value that still wins, or plays the card with the lowest value overall
-            must_play_cards = self.get_cards_matching_suit(playedcard.getSuit())
+            must_play_cards = self.get_cards_matching_suit(playedcard.get_suit())
             min_val = 100
             winner_min_val = 100
             winner_index = -1
@@ -223,38 +223,38 @@ class ComputerHand(Hand):
                         min_val = self.cards[i].roundvalue
 
                 if winner_index != -1:
-                    return self.playCard(winner_index)
+                    return self.play_card(winner_index)
                 else:
-                    return self.playCard(min_index)
+                    return self.play_card(min_index)
 
             else:
-                return self.playCard(self.findLowestCard())
+                return self.play_card(self.find_lowest_card())
         else:
-            return self.playCard(self.findHighestCard())
+            return self.play_card(self.find_highest_card())
 
-    def findLowestCard(self):
+    def find_lowest_card(self):
         minval = 100
         lowcardindex = None
         for idx, card in self.cards.items():
-            if card.getValue() <= minval:
-                minval = card.getValue()
+            if card.get_value() <= minval:
+                minval = card.get_value()
                 lowcardindex = idx
         return lowcardindex
 
-    def findHighestCard(self):
+    def find_highest_card(self):
         maxval = 0
         highcardindex = None
         for idx, card in self.cards.items():
-            if card.getValue() >= maxval:
-                maxval = card.getValue()
+            if card.get_value() >= maxval:
+                maxval = card.get_value()
                 highcardindex = idx
         return highcardindex
 
-    def pickUpBidcard(self, bidcard):
-        self.setValues(trumpsuit=bidcard.getSuit(), evaltrumpsuit=True)
-        bidcard.setValue(trumpsuit=bidcard.getSuit(), evaltrumpsuit=True)
-        if self.cards[self.findLowestCard()].roundvalue < bidcard.roundvalue:
-            self.cards[self.findLowestCard()] = bidcard
+    def pickup_bidcard(self, bidcard):
+        self.set_values(trumpsuit=bidcard.get_suit(), evaltrumpsuit=True)
+        bidcard.set_value(trumpsuit=bidcard.get_suit(), evaltrumpsuit=True)
+        if self.cards[self.find_lowest_card()].roundvalue < bidcard.roundvalue:
+            self.cards[self.find_lowest_card()] = bidcard
 
     def __repr__(self):
         if self.playMode == 'norm':

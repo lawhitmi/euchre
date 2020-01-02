@@ -9,10 +9,10 @@ class Card:
         self.roundvalue = basevalue
         self.color = self.get_color()
 
-    def getValue(self):
+    def get_value(self):
         return self.roundvalue
 
-    def setValue(self, trumpsuit=None, leadsuit=None, resetval=False, evaltrumpsuit=False, basevaluereset=False):
+    def set_value(self, trumpsuit=None, leadsuit=None, resetval=False, evaltrumpsuit=False, basevaluereset=False):
         """
 
         :param basevaluereset:
@@ -69,7 +69,7 @@ class Card:
     def get_color(self):
         return COLORCODE[self.suit]
 
-    def getSuit(self):
+    def get_suit(self):
         """"""
         return self.suit
 

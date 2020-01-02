@@ -39,7 +39,7 @@ def test_bid_phase(create_computer_hand_nondealer, create_computer_hand, create_
     assert trumpsuit == 'Hearts'
     assert maker == c1
 
-    c1.setDealer()
+    c1.set_dealer()
     c2.dealer = False
     trumpsuit, maker = bid_phase(c2, c1, card, t)
     assert trumpsuit == 'Hearts'
@@ -49,7 +49,7 @@ def test_bid_phase(create_computer_hand_nondealer, create_computer_hand, create_
 def test_trick_phase(create_computer_hand_nondealer, create_computer_hand, create_table):
     firstplayer = create_computer_hand_nondealer
     secondplayer = create_computer_hand
-    firstplayer.setMaker()
+    firstplayer.set_maker()
     t = create_table
     trickwinner, points = trick_phase(firstplayer, secondplayer, trump='Diamonds', table=t)
     assert trickwinner == firstplayer
