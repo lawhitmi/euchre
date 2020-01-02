@@ -10,7 +10,7 @@ class Table:
         self.user = user
         self.bidcard = bidcard
         self.trumpSuit = ""
-        self.tricks = {self.user:0, self.computer: 0}
+        self.tricks = {self.user: 0, self.computer: 0}
 
     def showTable(self, playedcard1="", playedcard2="", score=None):
         """
@@ -41,7 +41,7 @@ class Table:
     def flipBidcard(self):
         self.bidcard = ""
 
-    def setBidcard(self,card):
+    def setBidcard(self, card):
         self.bidcard = card
 
     def setTrumpSuit(self, suit):

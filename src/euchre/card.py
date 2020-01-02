@@ -74,7 +74,7 @@ class Card:
         return self.suit
 
     def __repr__(self):
-        return str((self.facevalue, self.suit, self.roundvalue))  # TODO remove roundvalue here, just for trobleshooting
+        return str((self.facevalue, self.suit))
 
     def __gt__(self, othercard):
         return self.roundvalue > othercard.roundvalue

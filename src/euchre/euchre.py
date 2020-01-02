@@ -10,12 +10,29 @@ def pick_dealer():
 
     :return:
     """
-    isuserdealer = bool(randint(0, 1))
-    iscomputerdealer = not isuserdealer
-    return tuple((isuserdealer, iscomputerdealer))
+    is_user_dealer = bool(randint(0, 1))
+    is_computer_dealer = not is_user_dealer
+    return tuple((is_user_dealer, is_computer_dealer))
+
+
+def next_round_reset(deck, user, computer, table):
+    deck.shuffle()
+    userdealer = user.dealer
+    user.clearHand()
+    computer.clearHand()
+    if not userdealer:
+        user.setDealer()
+    else:
+        computer.setDealer()
+    table.clearTable()
+    bidcard = deck.deal(player='n')
+    table.setBidcard(bidcard)
+    user.setCards(deck.deal(player='y'))
+    computer.setCards(deck.deal(player='y'))
 
 
 def game():
+    # Initial setup
     deck = CardDeck()
     dealermask = pick_dealer()
     user = UserHand(dealerflag=dealermask[0], cards=deck.deal(player='y'))
@@ -23,6 +40,7 @@ def game():
     bidcard = deck.deal(player='n')
     table = Table(user, computer, bidcard)
 
+    # main game loop
     while True:
 
         if user.dealer:
@@ -45,21 +63,8 @@ def game():
         if table.tricks[trickwinner] >= 10:
             print(str(trickwinner.name) + ' wins!')
             break
-
         # Reset everything for next round
-        deck.shuffle()
-        userdealer = user.dealer
-        user.clearHand()
-        computer.clearHand()
-        if not userdealer:
-            user.setDealer()
-        else:
-            computer.setDealer()
-        table.clearTable()
-        bidcard = deck.deal(player='n')
-        table.setBidcard(bidcard)
-        user.setCards(deck.deal(player='y'))
-        computer.setCards(deck.deal(player='y'))
+        next_round_reset(user=user, computer=computer, deck=deck, table=table)
 
 
 def bid_phase(nondealer, dealer, bidcard, table):

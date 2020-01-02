@@ -1,24 +1,3 @@
-from src.euchre.hands import UserHand, ComputerHand
-from src.euchre.card import Card
-from pytest import fixture
-
-
-@fixture()
-def create_computer_hand():
-    j_spades = Card('J', 'Spades', 3)
-    a_diamonds = Card('A', 'Diamonds', 6)
-    ten_diamonds = Card('10', 'Diamonds', 2)
-    king_clubs = Card('K', 'Clubs', 5)
-    nine_hearts = Card('9', 'Hearts', 1)
-    hand = {1: j_spades, 2: a_diamonds, 3: ten_diamonds, 4: king_clubs, 5: nine_hearts}
-    computer = ComputerHand(hand, dealerflag=True, makerflag=False)
-    return computer
-
-
-@fixture()
-def create_card():
-    return Card('A', 'Hearts', 6)
-
 
 def test_calc_hand_val(create_computer_hand):
     c = create_computer_hand
@@ -81,4 +60,32 @@ def test_trick_decide(create_computer_hand, create_card):
 
 
 def test_bid_decide(create_computer_hand, create_card):
-    NotImplemented
+
+    c = create_computer_hand
+    bidcard = create_card
+    # Check that computer passes on bidcard
+    assert c.bidDecide(bidcard=bidcard) == 'pass'
+    # Check that computer chooses 'Clubs'
+    assert c.bidDecide(rnd=2, excludesuit='Hearts') == 'Clubs'
+
+    # Set to nondealer
+    c.dealer = False
+    c.setValues(basevaluereset=True)
+    # Should pass on bidcard
+    assert c.bidDecide(bidcard=bidcard) == 'pass'
+    # Then choose a suit
+    assert c.bidDecide(rnd=2, excludesuit='Hearts') == 'pass'
+    # If clubs is excluded, should pass
+    assert c.bidDecide(rnd=2, excludesuit='Clubs') == 'pass'
+
+    # TODO Add case for handvalue > 65 and nondealer
+    # TODO Add case for order-up and accepts
+
+
+def test_set_dealer(create_computer_hand_nondealer):
+    c = create_computer_hand_nondealer
+    assert c.dealer is False
+
+    c.setDealer()
+    assert c.dealer is True
+

@@ -30,10 +30,11 @@ NEED A FEW SENTENCES HERE.
 Sonarcloud.io was used for this project.  See the .sonarcloud.properties file in the root of the project for details
 about use.
 
-NEED A FEW SENTENCES HERE.
+NEED A FEW SENTENCES HERE. Note that a lot of refactoring and code complexity issues were identified and fixed through
+the use of this tool.
 
 3. Clean Code
-===========
+=============
 
  #. Don't Repeat Yourself (DRY) - Sonarcloud helps out with this principle by pointing out chunks of code which are
     repeated.  One such instance was my code to solicit input from the user.  I originally had several similar try-catch
@@ -51,7 +52,7 @@ NEED A FEW SENTENCES HERE.
 NEED A LINK HERE TO YOUR CHEATSHEET WITH 10 PRINCIPLES.
 
 4. Build Management
-===========
+===================
 
 Setuptools was used for this project due to its excellent integration with the python build and test processes.
 
@@ -68,7 +69,7 @@ Pytest was used to automate testing for this project.
 NEED A FEW SENTENCES HERE.
 
 6. Continuous Delivery
-===========
+======================
 Travis-CI was used to automate build and testing tasks with each push to github.
 
 .. image:: https://travis-ci.org/lawhitmi/euchre.svg?branch=master
@@ -96,18 +97,18 @@ https://github.com/lawhitmi/hello-world
 NEED A FEW SENTENCES HERE.
 
 9. Functional Programming
-===========
+=========================
 
 NEED A FEW SENTENCES HERE.
 
 OPTIONAL-Logical Solver
-===========
+=======================
 
 OPTIONAL-Code fragment in Scala or Clojure
-===========
+==========================================
 
 OPTIONAL-AOP
-===========
+============
 
 
 
