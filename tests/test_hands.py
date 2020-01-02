@@ -1,4 +1,3 @@
-
 def test_calc_hand_val(create_computer_hand):
     c = create_computer_hand
     # Check basevalue calculation
@@ -32,7 +31,7 @@ def test_find_highest_card(create_computer_hand):
     assert c.find_highest_card() == 5
 
 
-def test_pick_up_bidcard(create_computer_hand, create_card):
+def test_computer_pick_up_bidcard(create_computer_hand, create_card):
     computer = create_computer_hand
     # Save the card which should be dropped for checking later
     card_to_drop = computer.cards[3]
@@ -44,7 +43,7 @@ def test_pick_up_bidcard(create_computer_hand, create_card):
     assert card_to_drop not in computer.cards.values()
 
 
-def test_trick_decide(create_computer_hand, create_card):
+def test_computer_trick_decide(create_computer_hand, create_card):
     computer = create_computer_hand
     played_card = create_card
     card_to_be_played = computer.cards[2]
@@ -59,8 +58,7 @@ def test_trick_decide(create_computer_hand, create_card):
     assert computer.trick_decide(playedcard=played_card) == card_to_be_played
 
 
-def test_bid_decide(create_computer_hand, create_card):
-
+def test_computer_bid_decide(create_computer_hand, create_card):
     c = create_computer_hand
     bidcard = create_card
     # Check that computer passes on bidcard
@@ -89,3 +87,40 @@ def test_set_dealer(create_computer_hand_nondealer):
     c.set_dealer()
     assert c.dealer is True
 
+
+def test_user_bid_decide_dealer(create_user_hand, create_card, monkeypatch):
+    user = create_user_hand
+    user.set_dealer()
+    bidcard = create_card
+    list_of_responses_dealer = [1, 3, 2, 4]  # accept, pass, choose suit
+
+    def user_response_dealer(dummy1, dummy2):
+        return list_of_responses_dealer.pop(0)
+
+    monkeypatch.setattr("src.euchre.hands.get_user_response", user_response_dealer)
+    decision = user.bid_decide(bidcard=bidcard)
+    assert decision == 'accept'
+    assert user.cards[3] == bidcard
+    decision = user.bid_decide(bidcard=bidcard)
+    assert decision == 'pass'
+    decision = user.bid_decide(rnd=2, excludesuit='Clubs')
+    assert decision == 'Hearts'
+
+
+def test_user_bid_decide_nondealer(create_user_hand, create_card, monkeypatch):
+    user = create_user_hand
+    bidcard = create_card
+    list_of_responses_nondealer = [1, 2, 1, 3]  # order-up, pass, pass, choose suit
+
+    def user_response_nondealer(dummy1, dummy2):
+        return list_of_responses_nondealer.pop(0)
+
+    monkeypatch.setattr("src.euchre.hands.get_user_response", user_response_nondealer)
+    decision = user.bid_decide(bidcard=bidcard)
+    assert decision == 'order-up'
+    decision = user.bid_decide(bidcard=bidcard)
+    assert decision == 'pass'
+    decision = user.bid_decide(rnd=2, excludesuit='Clubs')
+    assert decision == 'pass'
+    decision = user.bid_decide(rnd=2, excludesuit='Clubs')
+    assert decision == 'Diamonds'

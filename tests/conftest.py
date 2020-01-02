@@ -9,7 +9,7 @@
 import pytest
 from src.euchre.card import Card
 from src.euchre.table import Table
-from src.euchre.hands import ComputerHand
+from src.euchre.hands import ComputerHand, UserHand
 from src.euchre.deck import CardDeck
 
 
@@ -35,6 +35,18 @@ def create_computer_hand_nondealer():
     hand = {1: q_spades, 2: j_diamonds, 3: q_diamonds, 4: nine_spades, 5: a_hearts}
     computer = ComputerHand(hand, dealerflag=False, makerflag=False)
     return computer
+
+
+@pytest.fixture()
+def create_user_hand():
+    card_one = Card('A', 'Spades', 6)
+    card_two = Card('J', 'Diamonds', 3)
+    card_three = Card('10', 'Clubs', 2)
+    card_four = Card('9', 'Spades', 1)
+    card_five = Card('A', 'Hearts', 6)
+    hand = {1: card_one, 2: card_two, 3: card_three, 4: card_four, 5: card_five}
+    user = UserHand(hand, dealerflag=False, makerflag=False)
+    return user
 
 
 @pytest.fixture()
