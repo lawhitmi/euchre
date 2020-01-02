@@ -28,3 +28,6 @@ jobs:
       run: |
         pip install pytest
         pytest
+    - name: Build Docs
+      run: |
+        python setup.py build_sphinx
