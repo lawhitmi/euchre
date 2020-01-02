@@ -67,10 +67,10 @@ class Hand:
 
     def __repr__(self):
         """Overloads str() operator"""
-        cardString = ""
+        card_string = ""
         for i in self.cards:
-            cardString = cardString + str(i) + str(self.cards[i])
-        return cardString
+            card_string = card_string + str(i) + str(self.cards[i])
+        return card_string
 
 
 class UserHand(Hand):
@@ -127,12 +127,12 @@ class UserHand(Hand):
             mustplaykeys = []
 
         if len(mustplaykeys) > 0:
-            cardToPlay = get_user_response("Which card would you like to play? ",
+            card_to_play = get_user_response("Which card would you like to play? ",
                                            mustplaykeys, 'Sorry, please play card with the matching suit')
         else:
-            cardToPlay = get_user_response("Which card would you like to play? ", self.cards.keys())
+            card_to_play = get_user_response("Which card would you like to play? ", self.cards.keys())
 
-        return self.play_card(cardToPlay)
+        return self.play_card(card_to_play)
 
     def pickup_bidcard(self, bidcard):
         cardtodiscard = int(input('Select a card to replace, or press (6) to leave it.'))
@@ -154,31 +154,31 @@ class ComputerHand(Hand):
             self.set_values(trumpsuit=trumpsuit, evaltrumpsuit=True)
         else:
             self.set_values(basevaluereset=True)
-        handVal = 0
+        hand_val = 0
         for i in self.cards:
-            handVal += self.cards[i].roundvalue
-        return handVal
+            hand_val += self.cards[i].roundvalue
+        return hand_val
 
     def bid_decide(self, bidcard=None, rnd=1, excludesuit=None):
         if bidcard:
-            handVal = self.calc_hand_value(bidcard.get_suit())
+            hand_val = self.calc_hand_value(bidcard.get_suit())
         else:
-            handVal = self.calc_hand_value()
+            hand_val = self.calc_hand_value()
 
         if rnd == 1:
             if not self.dealer:
-                if handVal >= 35:
+                if hand_val >= 35:
                     print('Computer Orders Up')
                     return 'order-up'
                 else:
                     print('Computer passes')
                     return 'pass'
             elif self.dealer:
-                if handVal >= 48:
+                if hand_val >= 48:
                     print('Computer accepts')
                     self.set_values(trumpsuit=bidcard.suit, evaltrumpsuit=True)
-                    swapIndex = self.find_lowest_card()
-                    self.cards[swapIndex] = bidcard
+                    swap_index = self.find_lowest_card()
+                    self.cards[swap_index] = bidcard
                     return 'accept'
                 else:
                     print('Computer passes')
@@ -258,9 +258,9 @@ class ComputerHand(Hand):
 
     def __repr__(self):
         if self.playMode == 'norm':
-            cardString = ""
+            card_string = ""
             for i in self.cards:
-                cardString = cardString + str(i) + str("('*','*')")
-            return cardString
+                card_string = card_string + str(i) + str("('*','*')")
+            return card_string
         elif self.playMode == 'learn':
             return super(ComputerHand, self).__repr__()
