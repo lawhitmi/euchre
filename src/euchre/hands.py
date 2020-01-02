@@ -128,7 +128,7 @@ class UserHand(Hand):
 
         if len(mustplaykeys) > 0:
             card_to_play = get_user_response("Which card would you like to play? ",
-                                           mustplaykeys, 'Sorry, please play card with the matching suit')
+                                             mustplaykeys, 'Sorry, please play card with the matching suit')
         else:
             card_to_play = get_user_response("Which card would you like to play? ", self.cards.keys())
 

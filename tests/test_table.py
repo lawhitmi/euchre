@@ -1,6 +1,3 @@
-import io
-import sys
-
 
 def test_clear_table(create_table, create_card):
     t = create_table
