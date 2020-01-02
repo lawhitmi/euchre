@@ -7,11 +7,11 @@ def test_clear_table(create_table, create_card):
     # Setup table for clear and check setup
     t.set_trumpsuit('Spades')
     t.set_bidcard(create_card)
-    assert t.trumpSuit == 'Spades' and t.bidcard == create_card
+    assert t.trumpsuit == 'Spades' and t.bidcard == create_card
 
     # Check clear table
     t.clear_table()
-    assert not t.trumpSuit and not t.bidcard
+    assert not t.trumpsuit and not t.bidcard
 
 
 def test_flip_and_set_bidcard(create_table, create_card):
@@ -26,9 +26,9 @@ def test_flip_and_set_bidcard(create_table, create_card):
 
 def test_set_trumpsuit(create_table):
     t = create_table
-    assert not t.trumpSuit
+    assert not t.trumpsuit
     t.set_trumpsuit('Spades')
-    assert t.trumpSuit == 'Spades'
+    assert t.trumpsuit == 'Spades'
 
 
 def test_show_table(create_table, create_score, create_card, create_card_2, capsys):
