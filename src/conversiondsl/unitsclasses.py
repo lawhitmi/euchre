@@ -31,8 +31,8 @@ class FeetAndInches(object):
                     result = (int(fracInches), int(32))
         return [feet, inches, result]
 
-    def convertToDecimal(self, feet, inches, fraction_inches):
-        return feet + inches / 12 + (fraction_inches[0] / fraction_inches[1]) / 12
+    def convertToDecimal(self):
+        return self.feet + self.inches / 12 + (self.fraction_inches[0] / self.fraction_inches[1]) / 12
 
     def getDecimal(self):
         return self.feetDecimal
