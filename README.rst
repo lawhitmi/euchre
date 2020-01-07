@@ -16,8 +16,15 @@ played, visit `this website <https://www.thesprucecrafts.com/twohanded-euchre-ca
 
 1. UML
 ===========
+Bidding Phase - Activity Diagram
+
 .. image:: http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.github.com/lawhitmi/euchre/master/docs/UML/actDiag.puml
-NEED ONE SENTENCE HERE WITH LINKS TO THE UML DIAGRAMS.
+
+Class Diagram
+
+.. image:: http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.github.com/lawhitmi/euchre/master/docs/UML/classDiag.puml
+
+NEED ONE SENTENCE HERE.
 
 NEED A FEW SENTENCES HERE.
 
