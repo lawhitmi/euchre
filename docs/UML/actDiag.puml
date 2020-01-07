@@ -1,0 +1,59 @@
+@startuml actDiag
+|Dealer|
+start
+:Cards are Dealt;
+|#AntiqueWhite|Non-Dealer|
+if (PASS or ORDERUP) then (pass)
+    |Dealer|
+    if (ACCEPT or PASS) then (accept)
+        : Pick up Card;
+        : Bidding Ends;
+        stop
+    else (pass)
+        :Bid Card Discarded;
+        |Non-Dealer|
+        if (Suit Selected) then (pass)
+            |Dealer|
+            : Chooses Suit;
+            : Bidding Ends;
+            stop
+        else (select)
+            |Non-Dealer|
+            : Bidding Ends;
+            stop
+        endif
+    endif
+else (order-up)
+    |Non-Dealer|
+    :Bidding Ends;
+stop
+@enduml actDiag
+
+@startuml swimlane
+|#AntiqueWhite|Non-dealer|
+start
+if (Face-up Card) then (Order-up)
+    |Dealer|
+    if () then (Pick up)
+        end
+    else (Leave it)
+        end
+    endif
+else (Pass)
+    if () then (Accept)
+        end
+    else (Pass)
+        |Non-dealer|
+        if (Card is flipped over) then (Choose suit)
+            end
+        else (Don't choose)
+            |Dealer|
+            :Dealer chooses;
+            end
+        endif
+    endif
+    
+|Non-dealer|
+endif
+
+@enduml

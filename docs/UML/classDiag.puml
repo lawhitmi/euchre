@@ -1,0 +1,66 @@
+@startuml classDiag
+class Deck {
+    {field} +card_dict
+    {field} +card_suits
+    {field} +card_face_values
+    {method} +deal
+    {method} +build_deck
+    {method} +shuffle
+}
+class Hand {
+    {field} +cards
+    {field} +dealer
+    {field} +maker
+    {method} -play_card
+    {method} +set_values
+    {method} +set_cards
+    {method} +set_maker
+    {method} +set_dealer
+    {method} +clear_hand
+    {method} -get_cards_matching_suit
+}
+class UserHand {
+    {field} +name 
+    {method} +bid_decide
+    {method} +trick_decide
+    {method} -pickup_bidcard
+}
+class ComputerHand {
+    {field} +name
+    {method} +bid_decide
+    {method} +trick_decide
+    {method} -calc_hand_val
+    {method} -find_highest_card
+    {method} -find_lowest_card
+    {method} -pickup_bidcard
+}
+class Table {
+    {field} +trumpsuit
+    {field} +tricks
+    {field} +bidCard
+    {field} +computer
+    {field} +user
+    {method} +flip_bidcard
+    {method} +showTable
+    {method} +set_bidcard
+    {method} +clear_table
+    {method} +set_trumpsuit
+}
+class Card {
+    {field} facevalue
+    {field} suit
+    {field} color
+    {field} basevalue
+    {field} roundvalue
+    {method} +setValue
+    {method} +get_color
+    {method} +get_suit
+}
+
+Deck "1" *-- "many" Card : contains
+Hand <|-- UserHand
+Hand <|-- ComputerHand
+Table -- UserHand
+Table -- ComputerHand
+Table -- Deck
+@enduml

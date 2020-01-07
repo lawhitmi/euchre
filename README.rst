@@ -16,7 +16,7 @@ played, visit `this website <https://www.thesprucecrafts.com/twohanded-euchre-ca
 
 1. UML
 ===========
-
+.. image:: http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.github.com/lawhitmi/euchre/master/docs/UML/actDiag.puml
 NEED ONE SENTENCE HERE WITH LINKS TO THE UML DIAGRAMS.
 
 NEED A FEW SENTENCES HERE.
@@ -55,6 +55,8 @@ NEED A LINK HERE TO YOUR CHEATSHEET WITH 10 PRINCIPLES.
 ===================
 
 Setuptools was used for this project due to its excellent integration with the python build and test processes.
+
+https://euchre.readthedocs.io/en/latest/index.html
 
 I had originally installed Gradle to perform the build management tasks for this projects, but found little documentation
 on its use with Python packages.  In my attempt to use Gradle, I found I was creating scripts to run Setuptools build
