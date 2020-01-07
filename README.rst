@@ -118,14 +118,6 @@ NEED A FEW SENTENCES HERE.
 
 NEED A FEW SENTENCES HERE.
 
-OPTIONAL-Logical Solver
-=======================
-
-OPTIONAL-Code fragment in Scala or Clojure
-==========================================
-
-OPTIONAL-AOP
-============
 
 
 

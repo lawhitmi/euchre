@@ -15,6 +15,6 @@
 # numpy==1.13.3
 # scipy==1.0
 #
-pytest
-pytest-cov
-sphinx
+pytest==5.2.2
+pytest-cov==2.8.1
+sphinx==2.3.1
