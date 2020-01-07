@@ -24,6 +24,10 @@ Class Diagram
 
 .. image:: http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.github.com/lawhitmi/euchre/master/docs/UML/classDiag.puml
 
+Use Case Diagram
+
+.. image:: http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.github.com/lawhitmi/euchre/master/docs/UML/useCaseDiag.puml
+
 NEED ONE SENTENCE HERE.
 
 NEED A FEW SENTENCES HERE.

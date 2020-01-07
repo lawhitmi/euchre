@@ -1,0 +1,4 @@
+@startuml useCase
+Player --> (Play Euchre) : Sees only their own hand
+Player -> (Learn Euchre) : Sees both hands as well as weightings of cards
+@enduml
