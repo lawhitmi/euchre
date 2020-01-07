@@ -68,6 +68,8 @@ NEED A LINK HERE TO YOUR CHEATSHEET WITH 10 PRINCIPLES.
 4. Build Management
 ===================
 
+.. image:: https://readthedocs.org/projects/euchre/badge/?version=latest&style=plastic
+
 Setuptools was used for this project due to its excellent integration with the python build and test processes.
 
 https://euchre.readthedocs.io/en/latest/index.html
