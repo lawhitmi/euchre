@@ -1,4 +1,11 @@
 def get_user_response(question, valid_responses, error_message=None):
+    """
+    Function to obtain input from the user.
+    :param question: string Question to ask user
+    :param valid_responses: list of valid responses to use in error catching
+    :param error_message: string Message to display if an exception occurs
+    :return: user decision
+    """
     while True:
         try:
             decision = int(input(question))
@@ -26,7 +33,7 @@ class Hand:
     def set_values(self, trumpsuit=None, leadsuit=None, resetval=False, evaltrumpsuit=False, basevaluereset=False):
         """
         Iterates through the cards and sets their round value based on the input conditions.
-        :param trumpsuit:
+        :param trumpsuit: current suit of trumpcard
         :param leadsuit: suit of the card played by the other player in a trick
         :param resetval: 'soft' reset which doesn't affect trumpsuited cards
         :param evaltrumpsuit: triggers card valuation using trump suit
@@ -44,12 +51,21 @@ class Hand:
         self.cards = carddict
 
     def set_maker(self):
+        """
+        Sets the maker flag to True
+        """
         self.maker = True
 
     def set_dealer(self):
+        """
+        Sets the dealer flag to True
+        """
         self.dealer = True
 
     def clear_hand(self):
+        """
+        Resets hand for the next round.
+        """
         self.cards = ""
         self.dealer = False
         self.maker = False
@@ -59,6 +75,11 @@ class Hand:
         return self.cards.pop(cardindex)
 
     def get_cards_matching_suit(self, suit):
+        """
+        Determines if any cards in hand match the played suit
+        :param suit: string suit of played card i.e. 'Spades'
+        :return: list of keys in hand that match the passed suit
+        """
         mustplaykeys = []
         for i, j in self.cards.items():
             if j.suit == suit:  # TODO update this so that the left bower matches the suit
@@ -81,7 +102,13 @@ class UserHand(Hand):
         self.name = "Player"
 
     def bid_decide(self, bidcard=None, rnd=1, excludesuit=None):
-
+        """
+        Defines user's bid phase
+        :param bidcard: Card type for decision
+        :param rnd: int Which round of bidding
+        :param excludesuit: string suit of bid card which can no longer be selected
+        :return: string User decision
+        """
         if rnd == 1:
             if not self.dealer:
                 decision = get_user_response('Press (1) to Order Up or (2) to Pass: ', [1, 2])
@@ -120,7 +147,11 @@ class UserHand(Hand):
                 return suitlist[decision - 2]
 
     def trick_decide(self, playedcard=None):
-
+        """
+        Controls user's trick phase.
+        :param playedcard: Card type Card played by other 'hand' if applicable
+        :return: Card type Card to play
+        """
         if playedcard:
             mustplaykeys = self.get_cards_matching_suit(playedcard.get_suit())
         else:
@@ -135,6 +166,11 @@ class UserHand(Hand):
         return self.play_card(card_to_play)
 
     def pickup_bidcard(self, bidcard):
+        """
+        Allows user to decide whether to pick up bidcard upon acceptance
+        :param bidcard: Card type  Played card
+        :return: None
+        """
         cardtodiscard = int(input('Select a card to replace, or press (6) to leave it.'))
         if cardtodiscard != 6:
             self.cards[cardtodiscard] = bidcard
@@ -150,6 +186,11 @@ class ComputerHand(Hand):
         self.name = "Computer"  # needed to make object hashable for key in dict
 
     def calc_hand_value(self, trumpsuit=None):
+        """
+        Private method which provides a sum of the values of the cards in the computer's hand
+        :param trumpsuit: string If provided, re-evaluates the card value using the trumpsuit
+        :return: int Sum of card values
+        """
         if trumpsuit:
             self.set_values(trumpsuit=trumpsuit, evaltrumpsuit=True)
         else:
@@ -160,6 +201,13 @@ class ComputerHand(Hand):
         return hand_val
 
     def bid_decide(self, bidcard=None, rnd=1, excludesuit=None):
+        """
+        Controls Computer's bid phase.
+        :param bidcard: Card type for decision
+        :param rnd: int Which round of bidding
+        :param excludesuit: string suit of bid card which can no longer be selected
+        :return: string Computer decision
+        """
         if bidcard:
             hand_val = self.calc_hand_value(bidcard.get_suit())
         else:
@@ -200,9 +248,9 @@ class ComputerHand(Hand):
 
     def trick_decide(self, playedcard=None):
         """
-
-        :param playedcard:
-        :return:
+        Controls Computers's trick phase.
+        :param playedcard: Card type Card played by other 'hand' if applicable
+        :return: Card type Card to play
         """
 
         if playedcard:
@@ -233,6 +281,9 @@ class ComputerHand(Hand):
             return self.play_card(self.find_highest_card())
 
     def find_lowest_card(self):
+        """
+        Returns the index in cards of the card with the lowest value
+        """
         minval = 100
         lowcardindex = None
         for idx, card in self.cards.items():
@@ -242,6 +293,9 @@ class ComputerHand(Hand):
         return lowcardindex
 
     def find_highest_card(self):
+        """
+        Returns the index in cards of the card with the highest value
+        """
         maxval = 0
         highcardindex = None
         for idx, card in self.cards.items():
@@ -251,6 +305,11 @@ class ComputerHand(Hand):
         return highcardindex
 
     def pickup_bidcard(self, bidcard):
+        """
+        Method for computer to decide on picking up the bidcard
+        :param bidcard: Card type on which to perform bid phase
+        :return: None
+        """
         self.set_values(trumpsuit=bidcard.get_suit(), evaltrumpsuit=True)
         bidcard.set_value(trumpsuit=bidcard.get_suit(), evaltrumpsuit=True)
         if self.cards[self.find_lowest_card()].roundvalue < bidcard.roundvalue:

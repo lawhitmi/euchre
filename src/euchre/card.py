@@ -2,6 +2,9 @@ COLORCODE = {'Spades': 'black', 'Clubs': 'black', 'Diamonds': 'red', 'Hearts': '
 
 
 class Card:
+    """
+    Represents an individual card in the deck. Also controls the value of the cards.
+    """
     def __init__(self, facevalue, suit, basevalue):
         self.facevalue = facevalue
         self.suit = suit
@@ -10,19 +13,22 @@ class Card:
         self.color = self.get_color()
 
     def get_value(self):
+        """
+        Getter method which provides the value of the card
+        :return: int  current value of the card
+        """
         return self.roundvalue
 
     def set_value(self, trumpsuit=None, leadsuit=None, resetval=False, evaltrumpsuit=False, basevaluereset=False):
         """
-
-        :param basevaluereset:
-        :param evaltrumpsuit:
-        :param trumpsuit:
-        :param leadsuit:
-        :param resetval:
-        :return:
+        Sets the value of the card depending on the trumpsuit, suit of card, phase of the game, etc.
+        :param trumpsuit: string i.e 'Spades'
+        :param leadsuit: string representing the first card played in a trick
+        :param resetval: bool 'soft' reset which doesn't change value of trumpsuited cards
+        :param evaltrumpsuit: bool forces change of value of trumpsuited cards
+        :param basevaluereset: bool 'hard' reset which restores all cards back to basevalue
+        :return: None
         """
-
         if basevaluereset:
             self.roundvalue = self.basevalue
 
@@ -67,10 +73,17 @@ class Card:
     #         self.roundvalue = self.basevalue
 
     def get_color(self):
+        """
+        Getter method for color
+        :return: string i.e 'black'
+        """
         return COLORCODE[self.suit]
 
     def get_suit(self):
-        """"""
+        """
+        Getter method for card suit
+        :return: string i.e. 'Spades'
+        """
         return self.suit
 
     def __repr__(self):

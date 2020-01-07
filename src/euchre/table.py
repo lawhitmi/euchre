@@ -1,7 +1,7 @@
 
 class Table:
     """
-
+    Controls the table printout and trick scoring
     """
 
     def __init__(self, user, computer, bidcard=None):
@@ -14,8 +14,11 @@ class Table:
 
     def show_table(self, playedcard1="", playedcard2="", score=None):
         """
-        Prints the playing table, Computer Hand, Field, User Hand
-        :return:
+        Prints the playing table, Computer Hand, Field, User Hand, Scores, etc.
+        :param playedcard1: Card type Card played by first player
+        :param playedcard2: Card type Card played by second player
+        :param score: dict Individual trick score
+        :return: None
         """
         print("*"*80)
         print("Score: User " + str(self.tricks[self.user]) + " Computer " + str(self.tricks[self.computer])
@@ -39,15 +42,33 @@ class Table:
         print(self.user)
 
     def flip_bidcard(self):
+        """
+        Removes bidcard when not picked up
+        :return: None
+        """
         self.bidcard = ""
 
     def set_bidcard(self, card):
+        """
+        Setter method for storing the card on which to bid.
+        :param card: Card type
+        :return: None
+        """
         self.bidcard = card
 
     def set_trumpsuit(self, suit):
+        """
+        Setter method for trick phase trumpsuit
+        :param suit: string i.e. 'Spades'
+        :return: None
+        """
         self.trumpsuit = suit
 
     def clear_table(self):
+        """
+        Resets table for next round
+        :return: None
+        """
         self.trumpsuit = ""
         self.bidcard = ""
 

@@ -11,7 +11,9 @@ class CardDeck:
         self.card_dict = self.build_deck()
 
     def build_deck(self):
-        """Builds a dictionary of Card with proper face value and suits"""
+        """Builds a dictionary of Card with proper face value and suits
+        :return: dict of Cards
+        """
         deck_dict = {}
         i = 1
         for face_value in self.card_face_values:
@@ -21,11 +23,19 @@ class CardDeck:
         return deck_dict
 
     def shuffle(self):
+        """
+        Rebuilds deck of cards (Shuffles)
+        :return: None
+        """
         self.card_dict = self.build_deck()
 
     def deal(self, player='y'):
-        """Selects 5 randomized cards from CardDict and returns them as a Dict
-        This action removes the cards from CardDict"""
+        """
+        Selects 5 randomized cards from card_dict and returns them as a Dict
+        This action removes the cards from card_dict
+        :param player: string 'y' or 'n' to determine how many cards to return
+        :return: dict of cards of desired length
+        """
         if player == 'y':
             mask = sample(self.card_dict.keys(), 5)
         elif player == 'n':

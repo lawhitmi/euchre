@@ -7,8 +7,8 @@ import time
 
 def pick_dealer():
     """
-
-    :return:
+    Randomly chooses a dealer to start the game
+    :return: tuple of bool (mask)
     """
     is_user_dealer = bool(randint(0, 1))
     is_computer_dealer = not is_user_dealer
@@ -16,6 +16,14 @@ def pick_dealer():
 
 
 def next_round_reset(deck, user, computer, table):
+    """
+    Function to reset state for start of next round
+    :param deck: Deck type
+    :param user: Userhand type
+    :param computer: ComputerHand type
+    :param table: Table type
+    :return: None
+    """
     deck.shuffle()
     userdealer = user.dealer
     user.clear_hand()
@@ -32,6 +40,9 @@ def next_round_reset(deck, user, computer, table):
 
 
 def game():
+    """
+    Main Game Function
+    """
     # Initial setup
     deck = CardDeck()
     dealermask = pick_dealer()
@@ -69,12 +80,12 @@ def game():
 
 def bid_phase(nondealer, dealer, bidcard, table):
     """
-
-    :param nondealer:
-    :param dealer:
-    :param bidcard:
-    :param table:
-    :return:
+    Controls overall bid phase of game.
+    :param nondealer: 'Hand' type
+    :param dealer: 'Hand' type
+    :param bidcard: 'Card' type
+    :param table: 'Table' type
+    :return: tuple (string trumpsuit, 'Hand' maker)
     """
     table.show_table()
     non_dealer_decision = nondealer.bid_decide(bidcard=bidcard)
@@ -101,7 +112,15 @@ def bid_phase(nondealer, dealer, bidcard, table):
 
 
 def trick_phase(firstplayer, secondplayer, trump, table, score={}):
-
+    """
+    Controls overall trick phase of game.
+    :param firstplayer: 'Hand' type  Which player leads
+    :param secondplayer: 'Hand' type Which player follows
+    :param trump: string suit of trump
+    :param table: Table type
+    :param score: dict {'Hand': int}  for trick
+    :return: tuple('Hand' winner, int #points to award)
+    """
     if len(score) == 0:
         score = {firstplayer: 0, secondplayer: 0}
     winner = check_for_winner(score)
@@ -139,6 +158,11 @@ def trick_phase(firstplayer, secondplayer, trump, table, score={}):
 
 
 def check_for_winner(score):
+    """
+    Evaluates score dict to see if there is a winner
+    :param score: dict {'Hand':points}
+    :return: tuple('Hand',points to award)
+    """
     for i, j in score.items():
         if not i.maker and j == 3:
             return tuple((i, 2))  # Euchred opponent
