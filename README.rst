@@ -53,7 +53,7 @@ the use of this tool.
  #. Don't Repeat Yourself (DRY) - Sonarcloud helps out with this principle by pointing out chunks of code which are
     repeated.  One such instance was my code to solicit input from the user.  I originally had several similar try-catch
     statements which I pulled out into a single function.
-    Link to function: `Function <https://github.com/lawhitmi/euchre/blob/a9721b79ddac1d64d1000cb292d8ba878371a76a/src/euchre/hands.py#L1>`__
+    Link to function: `Function <https://github.com/lawhitmi/euchre/blob/master/src/euchre/hands.py#L1>`__
 
  #. Source Code Conventions - `PEP8 <https://www.python.org/dev/peps/pep-0008/>`__
 
@@ -61,9 +61,9 @@ the use of this tool.
 
  #. Integration Operation Segregation Principle (IOSP) - See Hands classes.
 
- #.
+ #. Separation of Concerns (SoC) -
 
-NEED A LINK HERE TO YOUR CHEATSHEET WITH 10 PRINCIPLES.
+Link to `Cheatsheet <https://github.com/lawhitmi/euchre/blob/master/docs/CC_cheatsheet.rst>`__
 
 4. Build Management
 ===================
