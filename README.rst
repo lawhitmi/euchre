@@ -101,6 +101,8 @@ For this reason, I fell back on Setuptools.
 5. Testing
 ===========
 
+.. image:: https://sonarcloud.io/api/project_badges/measure?project=lawhitmi_euchre&metric=coverage
+
 Pytest was used to automate testing for this project.
 
 NEED A FEW SENTENCES HERE.
