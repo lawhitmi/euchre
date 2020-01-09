@@ -50,23 +50,36 @@ diagrams within the README document.
 
 Sonarcloud.io was used for this project.  Click on one of the badges above to see the sonarcloud.io interface.
 
-Sonarcloud
+I found the 'Code Smells' metric here particularly helpful as it identifies code that is too 'cognitively complex'.  It
+analyzes the number of arguments, the depth of nested flow control structures, and other traits to provide a complexity
+score and recommends the refactoring of code which exceeds a certain limit.  Sonarcloud also helps with PEP8 compliance
+by pointing out naming inconsistencies.
 
 3. Clean Code
 =============
 
- #. Don't Repeat Yourself (DRY) - Sonarcloud helps out with this principle by pointing out chunks of code which are
-    repeated.  One such instance was my code to solicit input from the user.  I originally had several similar try-catch
-    statements which I pulled out into a single function.
-    Link to function: `Function <https://github.com/lawhitmi/euchre/blob/master/src/euchre/hands.py#L1>`__
+ #. Don't Repeat Yourself (DRY) - `Function <https://github.com/lawhitmi/euchre/blob/master/src/euchre/hands.py#L1>`__
+
+        Sonarcloud helps out with this principle by pointing out chunks of code which are
+        repeated.  One such instance was my code to solicit input from the user.  I originally had several similar try-catch
+        statements which I pulled out into a single function. See link above.
 
  #. Source Code Conventions - `PEP8 <https://www.python.org/dev/peps/pep-0008/>`__
 
- #. Single Responsibility Principle - See deck class
+        Naming of variables, classes, methods, and functions were refactored to comply with PEP8 recommendations.
+
+ #. Single Responsibility Principle - `Deck Module <https://github.com/lawhitmi/euchre/blob/master/src/euchre/deck.py>`__
+
+        This deck class controls the building and dealing of the cards.  The only reason this class would change would be
+        if the deck itself needed to change.
 
  #. Integration Operation Segregation Principle (IOSP) - See Hands classes.
 
+
+
  #. Separation of Concerns (SoC) -
+
+
 
 Link to `Cheatsheet <https://github.com/lawhitmi/euchre/blob/master/docs/CC_cheatsheet.rst>`__
 
