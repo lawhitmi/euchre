@@ -31,9 +31,11 @@ Use Case Diagram
 
 .. image:: http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.github.com/lawhitmi/euchre/master/docs/UML/useCaseDiag.puml
 
-NEED ONE SENTENCE HERE.
 
-NEED A FEW SENTENCES HERE.
+PlantUML was used to generate UML diagrams for this project. Because it is text-based, it can easily be versioned along
+with the rest of the code.  Passing the .puml files in github to the plantuml website allows rendering of the UML
+diagrams within the README document.
+
 
 2. Metrics
 ===========
@@ -46,11 +48,9 @@ NEED A FEW SENTENCES HERE.
 .. image:: https://sonarcloud.io/api/project_badges/measure?project=lawhitmi_euchre&metric=ncloc
     :target: https://sonarcloud.io/dashboard?id=lawhitmi_euchre
 
-Sonarcloud.io was used for this project.  See the .sonarcloud.properties file in the root of the project for details
-about use.
+Sonarcloud.io was used for this project.  Click on one of the badges above to see the sonarcloud.io interface.
 
-NEED A FEW SENTENCES HERE. Note that a lot of refactoring and code complexity issues were identified and fixed through
-the use of this tool.
+Sonarcloud
 
 3. Clean Code
 =============
