@@ -38,8 +38,13 @@ NEED A FEW SENTENCES HERE.
 2. Metrics
 ===========
 .. image:: https://sonarcloud.io/api/project_badges/measure?project=lawhitmi_euchre&metric=alert_status
+    :target: https://sonarcloud.io/dashboard?id=lawhitmi_euchre
 .. image:: https://sonarcloud.io/api/project_badges/measure?project=lawhitmi_euchre&metric=sqale_index
+    :target: https://sonarcloud.io/dashboard?id=lawhitmi_euchre
 .. image:: https://sonarcloud.io/api/project_badges/measure?project=lawhitmi_euchre&metric=code_smells
+    :target: https://sonarcloud.io/dashboard?id=lawhitmi_euchre
+.. image:: https://sonarcloud.io/api/project_badges/measure?project=lawhitmi_euchre&metric=ncloc
+    :target: https://sonarcloud.io/dashboard?id=lawhitmi_euchre
 
 Sonarcloud.io was used for this project.  See the .sonarcloud.properties file in the root of the project for details
 about use.
@@ -68,6 +73,9 @@ Link to `Cheatsheet <https://github.com/lawhitmi/euchre/blob/master/docs/CC_chea
 4. Build Management
 ===================
 
+.. image:: https://readthedocs.org/projects/euchre/badge/?version=latest&style=plastic
+    :target: https://euchre.readthedocs.io/en/latest/index.html
+
 Setuptools was used for this project due to its excellent integration with the python build and test processes.
 
 https://euchre.readthedocs.io/en/latest/index.html
@@ -89,6 +97,7 @@ NEED A FEW SENTENCES HERE.
 Travis-CI was used to automate build and testing tasks with each push to github.
 
 .. image:: https://travis-ci.org/lawhitmi/euchre.svg?branch=master
+    :target: https://travis-ci.org/lawhitmi/euchre
 .. image:: https://github.com/lawhitmi/euchre/workflows/Python%20application/badge.svg
 
 NEED A FEW SENTENCES HERE.
@@ -127,3 +136,5 @@ Note
 
 This project has been set up using PyScaffold 3.2.3. For details and usage
 information on PyScaffold see https://pyscaffold.org/.
+
+
