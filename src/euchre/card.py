@@ -5,12 +5,13 @@ class Card:
     """
     Represents an individual card in the deck. Also controls the value of the cards.
     """
-    def __init__(self, facevalue, suit, basevalue):
+    def __init__(self, facevalue, suit, basevalue, learner=False):
         self.facevalue = facevalue
         self.suit = suit
         self.basevalue = basevalue
         self.roundvalue = basevalue
         self.color = self.get_color()
+        self.learner = learner
 
     def get_value(self):
         """
@@ -87,7 +88,10 @@ class Card:
         return self.suit
 
     def __repr__(self):
-        return str((self.facevalue, self.suit))
+        if self.learner:
+            return str((self.facevalue, self.suit, self.roundvalue))
+        else:
+            return str((self.facevalue, self.suit))
 
     def __gt__(self, othercard):
         return self.roundvalue > othercard.roundvalue

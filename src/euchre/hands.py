@@ -180,9 +180,9 @@ class ComputerHand(Hand):
     """Controls the Computer's Hand
     """
 
-    def __init__(self, cards={}, dealerflag=False, makerflag=False, mode='learn'):
+    def __init__(self, cards={}, dealerflag=False, makerflag=False, play_mode=False):
         super().__init__(cards, dealerflag, makerflag)
-        self.playMode = mode
+        self.playMode = play_mode
         self.name = "Computer"  # needed to make object hashable for key in dict
 
     def calc_hand_value(self, trumpsuit=None):
@@ -316,10 +316,10 @@ class ComputerHand(Hand):
             self.cards[self.find_lowest_card()] = bidcard
 
     def __repr__(self):
-        if self.playMode == 'norm':
+        if not self.playMode:
             card_string = ""
             for i in self.cards:
                 card_string = card_string + str(i) + str("('*','*')")
             return card_string
-        elif self.playMode == 'learn':
+        else:
             return super(ComputerHand, self).__repr__()

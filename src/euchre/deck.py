@@ -5,9 +5,10 @@ from .card import Card
 class CardDeck:
     """Controls deck and deals cards"""
 
-    def __init__(self):
+    def __init__(self, learner=False):
         self.card_face_values = {'9': 1, '10': 2, 'J': 3, 'Q': 4, 'K': 5, 'A': 6}
         self.card_suits = ['Spades', 'Hearts', 'Clubs', 'Diamonds']
+        self.learner = learner
         self.card_dict = self.build_deck()
 
     def build_deck(self):
@@ -18,7 +19,7 @@ class CardDeck:
         i = 1
         for face_value in self.card_face_values:
             for suit in self.card_suits:
-                deck_dict[i] = Card(face_value, suit, self.card_face_values[face_value])
+                deck_dict[i] = Card(face_value, suit, self.card_face_values[face_value], self.learner)
                 i += 1
         return deck_dict
 

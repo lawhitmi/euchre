@@ -43,11 +43,18 @@ def game():
     """
     Main Game Function
     """
+    # Ask user if they'd like to play or learn
+    play_mode = input("Would you like to play in learning mode? (Y or N)")
+    if play_mode.lower() == 'y':
+        learn = True
+    elif play_mode.lower() == 'n':
+        learn = False
+
     # Initial setup
-    deck = CardDeck()
+    deck = CardDeck(learner=learn)
     dealermask = pick_dealer()
     user = UserHand(dealerflag=dealermask[0], cards=deck.deal(player='y'))
-    computer = ComputerHand(dealerflag=dealermask[1], cards=deck.deal(player='y'))
+    computer = ComputerHand(dealerflag=dealermask[1], cards=deck.deal(player='y'), play_mode=learn)
     bidcard = deck.deal(player='n')
     table = Table(user, computer, bidcard)
 
