@@ -1,4 +1,3 @@
-# TODO Ensure this class is immutable
 class FeetAndInches(object):
 
     def __init__(self, feet, inches=0, fraction_inches=0):
@@ -13,6 +12,12 @@ class FeetAndInches(object):
         self.feet = a[0]
         self.inches = a[1]
         self.fraction_inches = a[2]
+
+    def __setattr__(self, name, value):
+        """"""
+        msg = "'%s' has no attribute %s" % (self.__class__,
+                                            name)
+        raise AttributeError(msg)
 
     def breakDown(self):
         feet = int(self.getDecimal())
