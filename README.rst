@@ -172,13 +172,16 @@ and this will be returned
 
 The DSL above was created using functional programming principles.
 
-#. only final data structures
-#. (mostly) side effect free functions
-#. the use of higher order functions
-#. functions as parameters and return values
-#. use clojures / anonymous functions
+#. Only final `data structures <https://github.com/lawhitmi/euchre/blob/375fbbd9e33ee81f8d8c600585888d51678ec6de/src/conversiondsl/unitsclasses.py#L16>`__
+#. (`Mostly <https://github.com/lawhitmi/euchre/blob/375fbbd9e33ee81f8d8c600585888d51678ec6de/src/conversiondsl/converters.py#L73>`__) side effect free `functions <https://github.com/lawhitmi/euchre/blob/375fbbd9e33ee81f8d8c600585888d51678ec6de/src/conversiondsl/converters.py#L10>`__
+#. Use of higher order functions: Functions as `parameters and return values <https://github.com/lawhitmi/euchre/blob/375fbbd9e33ee81f8d8c600585888d51678ec6de/src/conversiondsl/dsl.py#L10>`__
+#. `Anonymous functions <https://github.com/lawhitmi/euchre/blob/375fbbd9e33ee81f8d8c600585888d51678ec6de/src/conversiondsl/converters.py#L60>`__
 
-
+Python provides a `functools` library which provides some capabilities for functional programming, however when trying
+to ensure final data structures, it seems that there's not a recommended method of performing this.  The methods that I
+found and used entail overriding the __setattr__ method so that values can not be assigned via the ``inst.attr = val``
+syntax.  The conversiondsl package uses the ``reduce`` function to chain together function calls and return a combined
+function to which we can pass our input value and receive the result.
 
 
 
