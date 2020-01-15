@@ -152,7 +152,7 @@ other useful checks.
 8. DSL
 ===========
 
-A Domain Specific Language is included in the 'conversiondsl' package `here <https://github.com/lawhitmi/euchre/blob/master/src/conversiondsl/>`__
+A Domain Specific Language is included in the 'conversiondsl' package `here <https://github.com/lawhitmi/euchre/blob/master/src/conversiondsl/>`__.
 This is a simple DSL for converting between units of measurement using natural language. For example, the following can
 be passed to the parser.
 
@@ -166,6 +166,12 @@ and this will be returned
 
     0.38 m
 
+In order to run this code, after forking the repository, just run the dsl.py file directly and provide the ``demo.dsl``
+file as an argument.  As such:
+
+::
+
+    python dsl.py demo.dsl
 
 9. Functional Programming
 =========================
