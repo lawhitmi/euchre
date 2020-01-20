@@ -79,9 +79,18 @@ by pointing out naming inconsistencies.
 
  #. Integration Operation Segregation Principle (IOSP) - See Hands classes.
 
+        `Integration <https://github.com/lawhitmi/euchre/blob/34c085d8d3493bd640626bf67cb214857e86030a/src/euchre/hands.py#L33>`__:
+        This method simply calls other methods, no logic.
+
+        `Operation <https://github.com/lawhitmi/euchre/blob/34c085d8d3493bd640626bf67cb214857e86030a/src/euchre/hands.py#L77>`__:
+        This method contains only logic, no other method calls.
 
 
- #. Separation of Concerns (SoC) -
+ #. Separation of Concerns (SoC)
+
+        This category is similar to SRP, however Concerns are a superset of Responsibilities.  Where possible, all `output
+        to the console <https://github.com/lawhitmi/euchre/blob/34c085d8d3493bd640626bf67cb214857e86030a/src/euchre/table.py#L15>`__
+        is split out into separate functions or methods as this is a separate 'Concern'.
 
 
 
@@ -106,9 +115,8 @@ For this reason, I fell back on Setuptools.
 
 5. Testing
 ===========
-Pytest was used to automate testing for this project.
-
-.. image:: https://sonarcloud.io/api/project_badges/measure?project=lawhitmi_euchre&metric=coverage
+Pytest was used to automate testing for this project. Unit tests are contained in the
+`tests <https://github.com/lawhitmi/euchre/tree/master/tests>`__ directory.
 
 This package provides useful `decorator tools <https://github.com/lawhitmi/euchre/blob/c03efef45c0ca504d881d0f225a31fec92b0d431/tests/conftest.py#L40>`__
 for mocking up the dependencies for unit testing.  The Pytest-cov package provides coverage metrics for the tests as well.
@@ -125,8 +133,10 @@ Travis-CI was used to automate build and testing tasks with each push to github.
     :target: https://travis-ci.org/lawhitmi/euchre
 .. image:: https://github.com/lawhitmi/euchre/workflows/Python%20application/badge.svg
 
-The `.travis.yml <https://github.com/lawhitmi/euchre/blob/master/.travis.yml>`__ file gives the setup for the Travis-CI build.  The Setuptools package was used to perform a build of the
-package, run the testing, and to build the documentation.
+The `.travis.yml <https://github.com/lawhitmi/euchre/blob/master/.travis.yml>`__ file gives the setup for the Travis-CI build.
+The Setuptools package was used to perform a build of the package, run the testing, and to build the documentation on Travis-CI.
+For a larger project, Travis Pro provides the ability to both run these tasks as well as push result files to desired
+locations for coverage reports, documentation updates, and publishing of built files.
 
 7. IDE
 ===========
@@ -167,7 +177,7 @@ and this will be returned
     0.38 m
 
 In order to run this code, after forking the repository, just run the dsl.py file directly and provide the ``demo.dsl``
-file as an argument.  As such:
+file as an argument.  See below:
 
 ::
 
@@ -178,15 +188,14 @@ file as an argument.  As such:
 
 The DSL above was created using functional programming principles.
 
-#. Only final `data structures <https://github.com/lawhitmi/euchre/blob/375fbbd9e33ee81f8d8c600585888d51678ec6de/src/conversiondsl/unitsclasses.py#L16>`__
+#. Only final `data structures <https://github.com/lawhitmi/euchre/blob/9f4ad3adf28e19206963e4e160b9eeaf53f87477/src/conversiondsl/unitsclasses.py#L11>`__
 #. (`Mostly <https://github.com/lawhitmi/euchre/blob/375fbbd9e33ee81f8d8c600585888d51678ec6de/src/conversiondsl/converters.py#L73>`__) side effect free `functions <https://github.com/lawhitmi/euchre/blob/375fbbd9e33ee81f8d8c600585888d51678ec6de/src/conversiondsl/converters.py#L10>`__
 #. Use of higher order functions: Functions as `parameters and return values <https://github.com/lawhitmi/euchre/blob/375fbbd9e33ee81f8d8c600585888d51678ec6de/src/conversiondsl/dsl.py#L10>`__
 #. `Anonymous functions <https://github.com/lawhitmi/euchre/blob/375fbbd9e33ee81f8d8c600585888d51678ec6de/src/conversiondsl/converters.py#L60>`__
 
-Python provides a `functools` library which provides some capabilities for functional programming, however when trying
-to ensure final data structures, it seems that there's not a recommended method of performing this.  The methods that I
-found and used entail overriding the __setattr__ method so that values can not be assigned via the ``inst.attr = val``
-syntax.  The conversiondsl package uses the ``reduce`` function to chain together function calls and return a combined
+Python provides a `functools` library which provides some capabilities for functional programming. In order to make my class
+immutable, I used the ``@property`` decorator so that values can not be assigned via the ``inst.attr = val``, but can be
+accessed by the ``inst.attr`` syntax.  The conversiondsl package uses the ``reduce`` function to chain together function calls and return a combined
 function to which we can pass our input value and receive the result.
 
 
