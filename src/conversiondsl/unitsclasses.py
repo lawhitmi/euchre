@@ -2,27 +2,32 @@ class FeetAndInches(object):
 
     def __init__(self, feet, inches=0, fraction_inches=0):
 
-        if fraction_inches != 0:
-            self.feetDecimal = feet + inches / 12 + fraction_inches / 12
-
-        else:
-            self.feetDecimal = feet + inches / 12
-
+        self._feetDecimal = feet + inches / 12 + fraction_inches / 12
         a = self.breakDown()
-        self.feet = a[0]
-        self.inches = a[1]
-        self.fraction_inches = a[2]
+        self._feet = a[0]
+        self._inches = a[1]
+        self._fraction_inches = a[2]
 
-    def __setattr__(self, name, value):
-        """"""
-        msg = "'%s' has no attribute %s" % (self.__class__,
-                                            name)
-        raise AttributeError(msg)
+    @property
+    def feetDecimal(self):
+        return self._feetDecimal
+
+    @property
+    def feet(self):
+        return self._feet
+
+    @property
+    def inches(self):
+        return self._inches
+
+    @property
+    def fraction_inches(self):
+        return self._fraction_inches
 
     def breakDown(self):
-        feet = int(self.getDecimal())
-        inches = int((self.getDecimal() - feet) * 12)
-        fracInches = int((((self.getDecimal() - feet) * 12) - inches) * 32)
+        feet = int(self.feetDecimal)
+        inches = int((self.feetDecimal - feet) * 12)
+        fracInches = int((((self.feetDecimal - feet) * 12) - inches) * 32)
 
         result = ()
         if fracInches == 0:
@@ -37,25 +42,22 @@ class FeetAndInches(object):
         return [feet, inches, result]
 
     def convertToDecimal(self):
-        return self.feet + self.inches / 12 + (self.fraction_inches[0] / self.fraction_inches[1]) / 12
-
-    def getDecimal(self):
-        return self.feetDecimal
+        return self._feet + self._inches / 12 + (self._fraction_inches[0] / self._fraction_inches[1]) / 12
 
     def __add__(self, y):
-        return FeetAndInches(self.getDecimal() + y.getDecimal())
+        return FeetAndInches(self.feetDecimal + y.feetDecimal)
 
     def __sub__(self, y):
-        return FeetAndInches(self.getDecimal() - y.getDecimal())
+        return FeetAndInches(self.feetDecimal - y.feetDecimal)
 
     def __str__(self):
-        response = str(self.feet) + "' "
-        if self.inches != 0:
-            response += str(self.inches)
-        if self.fraction_inches[0] != 0:
-            response += ' ' + str(self.fraction_inches[0]) + '/' + \
-                        str(self.fraction_inches[1])
-        if self.inches != 0 or self.fraction_inches[0] != 0:
+        response = str(self._feet) + "' "
+        if self._inches != 0:
+            response += str(self._inches)
+        if self._fraction_inches[0] != 0:
+            response += ' ' + str(self._fraction_inches[0]) + '/' + \
+                        str(self._fraction_inches[1])
+        if self._inches != 0 or self._fraction_inches[0] != 0:
             response += '"'
         return response
 

@@ -24,7 +24,7 @@ def get_decimal(instance):
     :param instance: type unitsclasses
     :return: float
     """
-    return instance.getDecimal()
+    return instance.feetDecimal
 
 
 def add(instances):
